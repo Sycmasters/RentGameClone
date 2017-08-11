@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public int moveOnly = 0; // This is for debugging only
     public static Game Instance;
 
+    // BOARD 
     private BoardData _board;
     public BoardData board
     {
@@ -17,7 +18,17 @@ public class Game : MonoBehaviour
         }
     }
 
-	// Use this for initialization
+    // DICE SYSTEM
+    private RollDices _dices;
+    public RollDices dices
+    {
+        get
+        {
+            if (_dices == null) { _dices = FindObjectOfType<RollDices>(); }
+            return _dices;
+        }
+    }
+
 	void Start ()
     {
         // Set singleton
