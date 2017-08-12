@@ -7,12 +7,14 @@ public class RollDices : MonoBehaviour
     public Dice[] dices;
     public int dicesValue;
 
-    private int dicesRolled;
-    	
+    public int dicesRolled;
+
+    private bool alreadyRolled = false;
+
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown(KeyCode.P))
+		if(Input.GetKeyDown(KeyCode.P) && !alreadyRolled)
         {
             // Restart value each time dices are going to roll
             dicesValue = 0;
@@ -23,6 +25,8 @@ public class RollDices : MonoBehaviour
                 // Roll Dices
                 dices[i].RollDice();
             }
+
+            alreadyRolled = true;
         }
 	}
 
@@ -37,7 +41,8 @@ public class RollDices : MonoBehaviour
         // When both dices are rolled then show the final result
         if(dicesRolled >= 2)
         {
-            Debug.Log(dicesValue);
+            //Debug.Log(dicesValue);
+            Game.Instance.MoveToken(dicesValue);
         }
     }
 
@@ -49,8 +54,11 @@ public class RollDices : MonoBehaviour
 
         for (int i = 0; i < dices.Length; i++)
         {
-            // Roll Dices
+            // Reset Dices
             dices[i].ResetDice();
         }
+
+        // Can roll again
+        alreadyRolled = false;
     }
 }

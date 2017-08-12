@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
-    public bool rolling, checkValue;
-
+    public bool rolling, checkValue, checkAgain;
+    
     private Rigidbody rbody;
-    private Vector3 originPosition;
-    private int shownNumber;
+    public Vector3 originPosition, localYAxis;
+    public int shownNumber;
 
     // Use this for initialization
     void Start ()
@@ -31,7 +31,7 @@ public class Dice : MonoBehaviour
             // Rotate dice
             transform.rotation = Random.rotation;
         }
-
+        
         if (checkValue)
         {
             // Check if the dice stopped moving/rolling
@@ -39,22 +39,20 @@ public class Dice : MonoBehaviour
             {
                 // Get right direction in Y axis
                 Vector3 worldYAxis = -Physics.gravity;
-
                 // Get dice direction in Y axis
-                Vector3 localYAxis = transform.InverseTransformDirection(worldYAxis);
+                localYAxis = transform.InverseTransformDirection(worldYAxis);
                 localYAxis.Normalize();
 
                 shownNumber = GetFaceNumber(localYAxis);
 
                 if (shownNumber > 0)
                 {
-                    Debug.Log(gameObject.name + " result " + shownNumber + " local " + localYAxis);
+                    //Debug.Log(gameObject.name + " result " + shownNumber + " local " + localYAxis);
                     Game.Instance.dices.AddDiceValue(shownNumber);
                 }
                 else
                 {
-                    Game.Instance.dices.ResetDices();
-                    Debug.Log("Error de conexion, por favor intente de nuevo");
+                    Debug.LogError("Error, try again");
                 }
 
                 checkValue = false;
@@ -65,27 +63,27 @@ public class Dice : MonoBehaviour
     int GetFaceNumber (Vector3 localYAxis)
     {
         // What number resulted from dice roll
-        if (localYAxis == Vector3.up)
+        if (Mathf.Round(localYAxis.y) > 0)
         {
             shownNumber = 6;
         }
-        else if (localYAxis == Vector3.down)
+        else if (Mathf.Round(localYAxis.y) < 0)
         {
             shownNumber = 1;
         }
-        else if (localYAxis == Vector3.left)
+        else if (Mathf.Round(localYAxis.x) < 0)
         {
             shownNumber = 4;
         }
-        else if (localYAxis == Vector3.right)
+        else if (Mathf.Round(localYAxis.x) > 0)
         {
             shownNumber = 3;
         }
-        else if (localYAxis == Vector3.forward)
+        else if (Mathf.Round(localYAxis.z) > 0)
         {
             shownNumber = 2;
         }
-        else if (localYAxis == Vector3.back)
+        else if (Mathf.Round(localYAxis.z) < 0)
         {
             shownNumber = 5;
         }
@@ -93,14 +91,11 @@ public class Dice : MonoBehaviour
         return shownNumber;
     }
 
-    public void RollDice()
+    public void RollDice(bool reset = true)
     {
         // Apply gravity
         rbody.isKinematic = false;
-
-        // Reset dices position
-        transform.localPosition = originPosition;
-
+        
         // Reset number result
         shownNumber = 0;
 
@@ -109,6 +104,12 @@ public class Dice : MonoBehaviour
 
         // Check on value
         checkValue = true;
+
+        if (reset)
+        {
+            // Reset dices position
+            transform.localPosition = originPosition;
+        }
     }
 
     public void ResetDice ()

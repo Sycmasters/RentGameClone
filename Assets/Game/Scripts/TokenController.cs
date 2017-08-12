@@ -8,7 +8,7 @@ public class TokenController : MonoBehaviour
 {
     public int playerIndex = 0;
     public int boardLocation = 0;
-
+    
     private NavMeshAgent agent;
 	
     // Use this for initialization
@@ -19,19 +19,18 @@ public class TokenController : MonoBehaviour
             agent = GetComponent<NavMeshAgent>();
         }
 	}
-	
-	// Update is called once per frame
-	private void Update ()
+
+    public void MoveToken (int spaces)
     {
-		if(Input.GetKeyDown(KeyCode.L) && Game.Instance.moveOnly == playerIndex)
-        {
-            // Move token with NavMesh
-            Vector2 boardPos = Game.Instance.board.boardPositions[boardLocation];
-            // Need to set the y value of Vector 2 on board pos as new destination of token in Z
-            Vector3 newPosition = new Vector3(boardPos.x, transform.position.y, boardPos.y);
-            agent.SetDestination(newPosition);
-        }
-	}
+        // Set the point at where we have to move to
+        SetNextLocation(spaces);
+
+        // Move token with NavMesh
+        Vector2 boardPos = Game.Instance.board.boardPositions[boardLocation];
+        // Need to set the y value of Vector 2 on board pos as new destination of token in Z
+        Vector3 newPosition = new Vector3(boardPos.x, transform.position.y, boardPos.y);
+        agent.SetDestination(newPosition);
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -41,6 +40,18 @@ public class TokenController : MonoBehaviour
             collision.gameObject.GetComponent<NavMeshAgent>().ResetPath();
             // Reset my movement to avoid fight for position with others
             agent.ResetPath();
+        }
+    }
+
+    private void SetNextLocation(int add)
+    {
+        if ((boardLocation + add) < 39)
+        {
+            boardLocation += add;
+        }
+        else
+        {
+            boardLocation = (boardLocation + add) - 40;
         }
     }
 }
