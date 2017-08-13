@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 62674f2e5560ff2489ac1791041cd7e0
+timeCreated: 1502615586
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Helvetica LT Std
+  fontNames:
+  - Helvetica LT Std
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

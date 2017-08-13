@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TouchScript;
 
 public class BoardData : MonoBehaviour
 {
+    [Header("Board")]
     public Transform[] boardPositions;
+    
+    [Header("Cards")]
     public Sprite[] cardsSprite;
+    public int[] cardsPrice;
+
+    [Header("Cards References")]
+    public GameObject cardWindow;
+    public Text cardPrice;
+    public Image cardImage;
 
 	private void OnEnable ()
     {
@@ -31,9 +41,25 @@ public class BoardData : MonoBehaviour
             // Tell if we touched a card
             if (e.Pointers[i].GetPressData().Target != null && e.Pointers[i].GetPressData().Target.tag == "Card")
             {
-                Debug.Log(e.Pointers[i].GetPressData().Target.name);
+                // Store in var for easier handling
+                Transform lastTouchedCard = e.Pointers[i].GetPressData().Target;
+
+                int lastTouchedCardIndex = int.Parse(lastTouchedCard.name);
+
+                // Check if is a displayable card (no quest, surprise, etc..)
+                if (cardsSprite[lastTouchedCardIndex] != null)
+                {
+                    DisplayCardInfo(lastTouchedCardIndex);
+                }
             }
         }
+    }
+
+    private void DisplayCardInfo (int index)
+    {
+        cardPrice.text = "G " + cardsPrice[index].ToString();
+        cardImage.sprite = cardsSprite[index];
+        cardWindow.SetActive(true);
     }
 }
 
