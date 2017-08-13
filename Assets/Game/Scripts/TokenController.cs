@@ -26,10 +26,10 @@ public class TokenController : MonoBehaviour
         SetNextLocation(spaces);
 
         // Move token with NavMesh
-        Vector2 boardPos = Game.Instance.board.boardPositions[boardLocation];
+        Vector3 boardPos = Game.Instance.board.boardPositions[boardLocation].position;
         // Need to set the y value of Vector 2 on board pos as new destination of token in Z
-        Vector3 newPosition = new Vector3(boardPos.x, transform.position.y, boardPos.y);
-        agent.SetDestination(newPosition);
+        boardPos.y = transform.position.y;
+        agent.SetDestination(boardPos);
     }
 
     private void OnTriggerEnter(Collider collision)

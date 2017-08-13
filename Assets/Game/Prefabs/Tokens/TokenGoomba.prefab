@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4850872981448802}
   - component: {fileID: 33397175492514438}
   - component: {fileID: 23442502054171080}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_335
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4800632258195012}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: goomba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4589171017247778}
   - component: {fileID: 33631257005754642}
   - component: {fileID: 23999330064088120}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_337
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4696310314756246}
   - component: {fileID: 33345571090774188}
   - component: {fileID: 23750251465039382}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_336
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4682267410692668}
   - component: {fileID: 33862839681199376}
   - component: {fileID: 23583698849161132}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_334
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 195693974019952332}
   - component: {fileID: 136723269317540536}
   - component: {fileID: 54352320363739290}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TokenGoomba
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9376201be5e64e4489a2370c3e75cf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   boardLocation: 0
 --- !u!136 &136723269317540536
 CapsuleCollider:

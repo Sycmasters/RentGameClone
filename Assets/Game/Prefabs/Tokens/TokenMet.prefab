@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4828773903955164}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mettaur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4703777740773074}
   - component: {fileID: 33849689719510444}
   - component: {fileID: 23726481809152138}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_46
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4281021956626404}
   - component: {fileID: 33452929657530844}
   - component: {fileID: 23231314577086914}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_44
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4384274938755754}
   - component: {fileID: 33624020732158194}
   - component: {fileID: 23242335057113232}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4262375195271274}
   - component: {fileID: 33250621961343354}
   - component: {fileID: 23262977593958578}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DrawCall_45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 195075705378594124}
   - component: {fileID: 136539246649260274}
   - component: {fileID: 54896967893620218}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TokenMet
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9376201be5e64e4489a2370c3e75cf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   boardLocation: 0
 --- !u!136 &136539246649260274
 CapsuleCollider:

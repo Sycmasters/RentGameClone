@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4885625583317174}
   - component: {fileID: 33852067930049962}
   - component: {fileID: 23074358140431692}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crash2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4938293556160720}
   - component: {fileID: 33599759240724560}
   - component: {fileID: 23410452001951528}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: eyes2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4429714314246848}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4143315664343782}
   - component: {fileID: 33435463263465966}
   - component: {fileID: 23961400332563094}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: eyelidtop2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 195425064559148892}
   - component: {fileID: 136145525778120164}
   - component: {fileID: 54436622892000122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TokenCrash
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4222957736712860}
   - component: {fileID: 33469513806108574}
   - component: {fileID: 23126274506332324}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: eyelidbottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9376201be5e64e4489a2370c3e75cf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   boardLocation: 0
 --- !u!136 &136145525778120164
 CapsuleCollider:

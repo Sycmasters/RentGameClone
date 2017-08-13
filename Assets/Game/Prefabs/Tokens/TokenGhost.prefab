@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4212784137997112}
   - component: {fileID: 33552832835874206}
   - component: {fileID: 23046938533844966}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: polygon0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4672427944826110}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MazeGhostRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 195320459870204088}
   - component: {fileID: 136986411012192106}
   - component: {fileID: 54459045644748654}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TokenGhost
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4416812219547818}
   - component: {fileID: 33802744904137274}
   - component: {fileID: 23326430321807100}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: polygon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9376201be5e64e4489a2370c3e75cf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   boardLocation: 0
 --- !u!136 &136986411012192106
 CapsuleCollider:
