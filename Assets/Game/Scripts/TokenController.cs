@@ -10,7 +10,8 @@ public class TokenController : MonoBehaviour
     public int boardLocation = 0;
     
     private NavMeshAgent agent;
-	
+    private bool moving;
+
     // Use this for initialization
 	private void Start ()
     {
@@ -19,6 +20,21 @@ public class TokenController : MonoBehaviour
             agent = GetComponent<NavMeshAgent>();
         }
 	}
+
+    public void Update()
+    {
+        // Approximately to destination
+        if(agent.hasPath && agent.remainingDistance < 0.25f && moving)
+        {
+            //Debug.Log("Done");
+            Game.Instance.TokenReachedDestination(boardLocation);
+            moving = false;
+        }
+        if (agent.hasPath)
+        {
+            Debug.Log(agent.remainingDistance);
+        }
+    }
 
     public void MoveToken (int spaces)
     {
@@ -30,6 +46,8 @@ public class TokenController : MonoBehaviour
         // Need to set the y value of Vector 2 on board pos as new destination of token in Z
         boardPos.y = transform.position.y;
         agent.SetDestination(boardPos);
+        // We are moving 
+        moving = true;
     }
 
     private void OnTriggerEnter(Collider collision)

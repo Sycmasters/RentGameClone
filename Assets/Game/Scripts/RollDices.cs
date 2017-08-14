@@ -5,11 +5,10 @@ using UnityEngine;
 public class RollDices : MonoBehaviour
 {
     public Dice[] dices;
-    public int dicesValue;
-
-    public int dicesRolled;
+    public int dicesValue, dicesRolled;
 
     private bool alreadyRolled = false;
+    private int pairsRolled;
 
 	// Update is called once per frame
 	void Update ()
@@ -32,6 +31,18 @@ public class RollDices : MonoBehaviour
 
     public void AddDiceValue (int val)
     {
+        // We already rolled one
+        if (dicesRolled == 1)
+        {
+            // If we rolled same number
+            if (dicesValue == val)
+            {
+                // Give another roll
+                alreadyRolled = false;
+                pairsRolled++;
+            }
+        }
+
         // Increase dice value
         dicesValue += val;
 
@@ -39,7 +50,7 @@ public class RollDices : MonoBehaviour
         dicesRolled += 1;
 
         // When both dices are rolled then show the final result
-        if(dicesRolled >= 2)
+        if(dicesRolled >= 2 && pairsRolled > 3)
         {
             //Debug.Log(dicesValue);
             Game.Instance.MoveToken(dicesValue);

@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TouchScript;
 
+[System.Serializable]
+public struct CardInfo
+{
+    public int price;
+    public int rent;
+    public int[] withProp;
+}
+
 public class BoardData : MonoBehaviour
 {
     [Header("Board")]
@@ -11,7 +19,7 @@ public class BoardData : MonoBehaviour
     
     [Header("Cards")]
     public Sprite[] cardsSprite;
-    public int[] cardsPrice;
+    public CardInfo[] cardsPrice;
 
     [Header("Cards References")]
     public GameObject cardWindow;
@@ -57,7 +65,7 @@ public class BoardData : MonoBehaviour
 
     private void DisplayCardInfo (int index)
     {
-        cardPrice.text = "G " + cardsPrice[index].ToString();
+        cardPrice.text = "G " + cardsPrice[index].price.ToString();
         cardImage.sprite = cardsSprite[index];
         cardWindow.SetActive(true);
     }

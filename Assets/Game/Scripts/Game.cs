@@ -1,16 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+    [Header("---------------")]
     public List<int> playerTurn;
+    public List<Sprite> playerAvatar;
+
+    [Header("---------------")]
     public int playerTurnIndex = 0;
     public bool turnPlayed = false;
 
+    [Header("---------------")]
     public RollDices diceSystem;
 
+    [Header("---------------")]
+    public GameObject getPaidWindow;
+    public Image payerAvatar;
+    public Image ownerAvatar;
+    public Text payerName;
+    public Text ownerName;
+    public Text payAmount;
+
     public static Game Instance;
+
+    [Header("---------------")]
+    [SerializeField]
+    private int testMoveSpaces;
 
     // BOARD 
     private BoardData _board;
@@ -31,6 +49,17 @@ public class Game : MonoBehaviour
         {
             if (_dices == null) { _dices = FindObjectOfType<RollDices>(); }
             return _dices;
+        }
+    }
+
+    // PROPERTY SYSTEM
+    private PropertiesManager _properties;
+    public PropertiesManager properties
+    {
+        get
+        {
+            if (_properties == null) { _properties = FindObjectOfType<PropertiesManager>(); }
+            return _properties;
         }
     }
 
@@ -62,17 +91,38 @@ public class Game : MonoBehaviour
         Instance = this;
 
         // Init list of turns
-        playerTurn = new List<int>() { 0, 1, 2, 3, 4, 5}; // This should automatically set
+        //playerTurn = new List<int>() { 0, 1, 2, 3, 4}; // This should automatically set
 
         // Randomly set the order of players turn (Shuffle orders)
         for(int i = 0; i < playerTurn.Count; i++)
         {
+            // Turns
             int temp = playerTurn[i];
             int randomIndex = Random.Range(i, playerTurn.Count);
             playerTurn[i] = playerTurn[randomIndex];
             playerTurn[randomIndex] = temp;
+
+            // Sprites
+            Sprite tempSprite = playerAvatar[i];
+            playerAvatar[i] = playerAvatar[randomIndex];
+            playerAvatar[randomIndex] = tempSprite;
+        }
+
+        // Turn on player info display 
+        for(int i = 0; i < playerTurn.Count; i++)
+        {
+            properties.playerDisplay[i].SetPlayer(i);
         }
 	}
+
+    private void Update()
+    {
+        // Just for testing -- Delete after production
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            MoveToken(testMoveSpaces);
+        }
+    }
 
     public void MoveToken (int spaces)
     {
@@ -96,6 +146,36 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void TokenReachedDestination(int currPosition)
+    {
+        // If player reached a buyable property
+        if(board.cardsSprite[currPosition] != null && properties.availableCards.Contains(currPosition))
+        {
+            properties.OpenSellWindow(currPosition);
+        }
+        // This card is possesed by someone 
+        else if(board.cardsSprite[currPosition] != null && !properties.availableCards.Contains(currPosition))
+        {
+            int ownerIndex = WhoOwnsThisCard(currPosition);
+            PayRent(currPosition, ownerIndex);
+        }
+    }
+
+    private int WhoOwnsThisCard (int cardIndex)
+    {
+        for(int i = 0; i < properties.playerDisplay.Count; i++)
+        {
+            // This player has the card
+            if(properties.playerDisplay[i].propertiesOwned.Contains(cardIndex))
+            {
+                // Return player index
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     private TokenController GetPlayerReference ()
     {
         for(int i = 0; i < players.Length; i++)
@@ -107,5 +187,24 @@ public class Game : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void PayRent (int currPosition, int ownerIndex)
+    {
+        // Charge current player
+        properties.playerDisplay[playerTurnIndex].playerCurrency -= board.cardsPrice[currPosition].rent;
+        properties.playerDisplay[playerTurnIndex].RefreshPlayerInfo();
+        payerAvatar.sprite = properties.playerDisplay[playerTurnIndex].playerAvatar.sprite;
+        payerName.text = properties.playerDisplay[playerTurnIndex].playerName;
+
+        // Pay owner
+        properties.playerDisplay[ownerIndex].playerCurrency += board.cardsPrice[currPosition].rent;
+        properties.playerDisplay[ownerIndex].RefreshPlayerInfo();
+        ownerAvatar.sprite = properties.playerDisplay[ownerIndex].playerAvatar.sprite;
+        ownerName.text = properties.playerDisplay[ownerIndex].playerName;
+
+        // Show amount
+        payAmount.text = "G " + board.cardsPrice[currPosition].rent;
+        getPaidWindow.SetActive(true);
     }
 }
