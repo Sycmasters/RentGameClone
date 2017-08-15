@@ -11,7 +11,7 @@ public class Dice : MonoBehaviour
     public int shownNumber;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
 		if(rbody == null)
         {

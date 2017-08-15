@@ -85,6 +85,16 @@ public class Game : MonoBehaviour
         }
     }
 
+    // ACTIONS SYSTEM
+    private PlayerActions _actions;
+    public PlayerActions actions
+    {
+        get
+        {
+            if (_actions == null) { _actions = FindObjectOfType<PlayerActions>(); }
+            return _actions;
+        }
+    }
     private void Start ()
     {
         // Set singleton
@@ -113,6 +123,16 @@ public class Game : MonoBehaviour
         {
             properties.playerDisplay[i].SetPlayer(i);
         }
+
+        // This is for the focus effect on buttons
+        // We need to start in the last to focus the first
+        playerTurnIndex = playerTurn.Count - 1;
+        // Now set next turn to start with the first player (player 0)
+        NextTurn();
+
+        // Init action buttons
+        actions.sell.CheckOnSellButton();
+        actions.build.CheckOnBuildButton();
 	}
 
     private void Update()
@@ -137,12 +157,25 @@ public class Game : MonoBehaviour
         // If is not last player turn go next
         if(playerTurnIndex < playerTurn.Count - 1)
         {
+            // Unfocus last player 
+            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.white;
+
+            // Go next player
             playerTurnIndex++;
+
+            // Focus next player
+            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.green;
         }
         // If is the last player ending turn, repeat cycle
         else
         {
+            // Unfocus last player 
+            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.white;
+
             playerTurnIndex = 0;
+
+            // Focus next player
+            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.green;
         }
     }
 

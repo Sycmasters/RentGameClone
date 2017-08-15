@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 222173961710788480}
   - component: {fileID: 114229221842563904}
   - component: {fileID: 114543825737157634}
-  - component: {fileID: 114103312003252590}
+  - component: {fileID: 114891975664691556}
   m_Layer: 5
-  m_Name: 1
+  m_Name: PlayerDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,21 +64,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114103312003252590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1006519354808870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320e25602b9fbd540afbf5baed40d919, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIndex: 0
-  playerCurrency: 0
-  playerLabel: {fileID: 114647542263087880}
-  playerAvatar: {fileID: 114388188933279140}
 --- !u!114 &114229221842563904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,6 +194,24 @@ MonoBehaviour:
   m_Text: 'Player 1
 
     G  0'
+--- !u!114 &114891975664691556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006519354808870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320e25602b9fbd540afbf5baed40d919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  playerCurrency: 0
+  playerName: 
+  propertiesOwned: 
+  playerLabel: {fileID: 114647542263087880}
+  playerAvatar: {fileID: 114388188933279140}
+  playerInfoButton: {fileID: 0}
 --- !u!222 &222173961710788480
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -262,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0051072524, y: 0.88384753}
   m_AnchorMax: {x: 0.16853933, y: 0.9909256}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -92, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224539273188181284

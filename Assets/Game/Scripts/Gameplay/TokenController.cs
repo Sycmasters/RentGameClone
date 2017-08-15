@@ -32,7 +32,7 @@ public class TokenController : MonoBehaviour
         }
         if (agent.hasPath)
         {
-            Debug.Log(agent.remainingDistance);
+            //Debug.Log(agent.remainingDistance);
         }
     }
 
