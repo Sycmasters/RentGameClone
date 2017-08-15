@@ -50,7 +50,7 @@ public class RollDices : MonoBehaviour
         dicesRolled += 1;
 
         // When both dices are rolled then show the final result
-        if(dicesRolled >= 2 && pairsRolled > 3)
+        if(dicesRolled >= 2 && pairsRolled < 3)
         {
             //Debug.Log(dicesValue);
             Game.Instance.MoveToken(dicesValue);

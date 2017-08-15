@@ -46,6 +46,11 @@ public class PropertiesManager : MonoBehaviour
             playerDisplay[Game.Instance.playerTurnIndex].propertiesOwned.Add(cardToBuy);
             playerDisplay[Game.Instance.playerTurnIndex].RefreshPlayerInfo();
 
+            // Show whose owner
+            SpriteRenderer ownerAvatar = Game.Instance.board.boardPositions[cardToBuy].GetComponentInChildren<SpriteRenderer>();
+            ownerAvatar.sprite = playerDisplay[Game.Instance.playerTurnIndex].playerAvatar.sprite;
+            ownerAvatar.enabled = true;
+
             // Hide selling window
             sellingWindow.SetActive(false);
 
