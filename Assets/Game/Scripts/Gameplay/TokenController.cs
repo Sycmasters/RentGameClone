@@ -24,7 +24,7 @@ public class TokenController : MonoBehaviour
     public void Update()
     {
         // Approximately to destination
-        if(agent.hasPath && agent.remainingDistance < 0.25f && moving)
+        if(agent.hasPath && agent.remainingDistance < 0.3f && moving)
         {
             //Debug.Log("Done");
             Game.Instance.TokenReachedDestination(boardLocation);
@@ -52,7 +52,7 @@ public class TokenController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player" && agent.remainingDistance > 0 && agent.remainingDistance <= 0.25f)
+        if(collision.gameObject.tag == "Player" && agent.remainingDistance > 0 && agent.remainingDistance <= 0.3f)
         {
             // Reset others movement so they won't fight for positions
             collision.gameObject.GetComponent<NavMeshAgent>().ResetPath();

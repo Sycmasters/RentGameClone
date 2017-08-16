@@ -44,6 +44,12 @@ public class BoardData : MonoBehaviour
 
     private void OnTouch (object sender, PointerEventArgs e)
     {
+        // Don't show properties when selling
+        if(Game.Instance.actions.sell.selling)
+        {
+            return;
+        }
+
         for(int i = 0; i < e.Pointers.Count; i++)
         {
             // Tell if we touched a card

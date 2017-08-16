@@ -54,6 +54,9 @@ public class PropertiesManager : MonoBehaviour
             // Hide selling window
             sellingWindow.SetActive(false);
 
+            // Check if we can sell now
+            Game.Instance.actions.sell.CheckOnSellButton();
+
             // Flush data
             cardToBuy = 0;
         }

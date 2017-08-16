@@ -8,12 +8,12 @@ public class BuildAction : MonoBehaviour
     private Button buildButton;
 
     // Use this for initialization
-    private void Start()
+    private void Awake ()
     {
         buildButton = GetComponent<Button>();
     }
 
-    public void CheckOnBuildButton()
+    public void CheckOnBuildButton ()
     {
         // Do we own a property?
         bool isActive = Game.Instance.properties.playerDisplay[Game.Instance.playerTurnIndex].propertiesOwned.Count > 0;

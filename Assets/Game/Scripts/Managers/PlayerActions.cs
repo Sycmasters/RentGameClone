@@ -8,6 +8,4 @@ public class PlayerActions : MonoBehaviour
     public BuildAction build;
     public SellAction sell;
     public StartPayAction startPay;
-    public MortgageAction mortgage;
-    public RedeemAction redeem;
 }

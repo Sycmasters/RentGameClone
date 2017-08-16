@@ -23,12 +23,16 @@ public class Game : MonoBehaviour
     public Text payerName;
     public Text ownerName;
     public Text payAmount;
+    public GameObject nextTurnButton;
 
     public static Game Instance;
 
     [Header("---------------")]
     [SerializeField]
     private int testMoveSpaces;
+    [SerializeField]
+    private bool dontHideTurnBtn;
+
 
     // BOARD 
     private BoardData _board;
@@ -133,6 +137,12 @@ public class Game : MonoBehaviour
         // Init action buttons
         actions.sell.CheckOnSellButton();
         actions.build.CheckOnBuildButton();
+
+        // Hide end turn button
+        if(!dontHideTurnBtn)
+        {
+            nextTurnButton.SetActive(false);
+        }
 	}
 
     private void Update()
@@ -151,6 +161,12 @@ public class Game : MonoBehaviour
 
     public void NextTurn ()
     {
+        // Hide end turn button
+        if(!dontHideTurnBtn)
+        {
+            nextTurnButton.SetActive(false);
+        }
+
         // Allow to roll again
         diceSystem.ResetDices();
 
@@ -192,6 +208,9 @@ public class Game : MonoBehaviour
             int ownerIndex = WhoOwnsThisCard(currPosition);
             PayRent(currPosition, ownerIndex);
         }
+
+        // We can end the turn now
+        nextTurnButton.SetActive(true);
     }
 
     private int WhoOwnsThisCard (int cardIndex)
