@@ -2383,7 +2383,7 @@ MonoBehaviour:
   ownerName: {fileID: 1637679511}
   payAmount: {fileID: 246036051}
   nextTurnButton: {fileID: 18931828}
-  testMoveSpaces: 9
+  testMoveSpaces: 0
   dontHideTurnBtn: 0
 --- !u!4 &585761641
 Transform:
@@ -2414,6 +2414,9 @@ MonoBehaviour:
   - {fileID: 718378313}
   dicesValue: 0
   dicesRolled: 0
+  testValueDice: 0
+  alreadyRolled: 0
+  pairsRolled: 0
 --- !u!114 &585761643
 MonoBehaviour:
   m_ObjectHideFlags: 0

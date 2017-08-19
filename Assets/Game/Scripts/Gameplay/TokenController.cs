@@ -8,7 +8,9 @@ public class TokenController : MonoBehaviour
 {
     public int playerIndex = 0;
     public int boardLocation = 0;
-    
+
+    public bool inJail;
+
     [SerializeField]
     private NavMeshAgent agent;
     private bool moving;
@@ -34,6 +36,17 @@ public class TokenController : MonoBehaviour
         {
             //Debug.Log(agent.remainingDistance);
         }
+    }
+
+    public void MoveToken()
+    {
+        // Move token with NavMesh
+        Vector3 boardPos = Game.Instance.board.boardPositions[boardLocation].position;
+        // Need to set the y value of Vector 2 on board pos as new destination of token in Z
+        boardPos.y = transform.position.y;
+        agent.SetDestination(boardPos);
+        // We are moving 
+        moving = true;
     }
 
     public void MoveToken (int spaces)
@@ -73,5 +86,17 @@ public class TokenController : MonoBehaviour
             Game.Instance.actions.payment.EnableInitialPayment();
             boardLocation = (boardLocation + add) - 40;
         }
+    }
+
+    public void SetPlayerInJail ()
+    {
+        inJail = true;
+        Game.Instance.CurrentPlayer.playerInfoButton.color = Color.red;
+    }
+
+    public void FreePlayerFromJail ()
+    {
+        inJail = false;
+        Game.Instance.CurrentPlayer.playerInfoButton.color = Color.green;
     }
 }

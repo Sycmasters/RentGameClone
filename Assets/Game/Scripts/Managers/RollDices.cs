@@ -6,8 +6,10 @@ public class RollDices : MonoBehaviour
 {
     public Dice[] dices;
     public int dicesValue, dicesRolled;
+    public int testValueDice;
 
-    private bool alreadyRolled = false;
+    public bool alreadyRolled = false;
+    [SerializeField]
     private int pairsRolled;
 
 	// Update is called once per frame
@@ -26,6 +28,16 @@ public class RollDices : MonoBehaviour
             }
 
             alreadyRolled = true;
+        }
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            AddDiceValue(testValueDice);
+
+            if(dicesRolled >= 2)
+            {
+                dicesValue = 0;
+                dicesRolled = 0;
+            }
         }
 	}
 
@@ -54,6 +66,18 @@ public class RollDices : MonoBehaviour
         {
             //Debug.Log(dicesValue);
             Game.Instance.MoveToken(dicesValue);
+        }
+        else if(dicesRolled >= 2 && pairsRolled >= 3)
+        {
+            // Get player 
+            TokenController player = Game.Instance.GetPlayerReference();
+
+            // Force player to go to Jail
+            player.boardLocation = 10; // 10 = Jail
+            player.MoveToken();
+
+            // Tell player is in jail
+            player.SetPlayerInJail();
         }
     }
 

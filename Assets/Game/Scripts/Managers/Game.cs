@@ -202,7 +202,10 @@ public class Game : MonoBehaviour
             playerTurnIndex++;
 
             // Focus next player
-            CurrentPlayer.playerInfoButton.color = Color.green;
+            if (!GetPlayerReference().inJail)
+            {
+                CurrentPlayer.playerInfoButton.color = Color.green;
+            }
         }
         // If is the last player ending turn, repeat cycle
         else
@@ -238,7 +241,10 @@ public class Game : MonoBehaviour
         }
 
         // We can end the turn now
-        nextTurnButton.SetActive(true);
+        if (dices.alreadyRolled)
+        {
+            nextTurnButton.SetActive(true);
+        }
     }
 
     private int WhoOwnsThisCard (int cardIndex)
@@ -256,7 +262,7 @@ public class Game : MonoBehaviour
         return -1;
     }
 
-    private TokenController GetPlayerReference ()
+    public TokenController GetPlayerReference ()
     {
         for(int i = 0; i < players.Length; i++)
         {
