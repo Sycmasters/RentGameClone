@@ -10,11 +10,13 @@ public class SellAction : MonoBehaviour
     public Button sellButton;
     public bool selling;
 
-	// Use this for initialization
-	private void Start ()
+    // Use this for initialization
+    [ContextMenu("GetReferences")]
+    public void Init ()
     {
         sellButton = GetComponent<Button>();
-	}
+        Debug.Log("Init method in " + gameObject.name);
+    }
 
     private void OnEnable()
     {
@@ -35,16 +37,18 @@ public class SellAction : MonoBehaviour
     public void CheckOnSellButton ()
     {
         // Do we own a property?
-        bool isActive = Game.Instance.properties.playerDisplay[Game.Instance.playerTurnIndex].propertiesOwned.Count > 0;
-        if(sellButton == null)
-        {
-            sellButton = GetComponent<Button>();
-        }
+        bool isActive = Game.Instance.CurrentPlayer.propertiesOwned.Count > 0;
         sellButton.interactable = isActive;
     }
 
     public void StartSelling ()
     {
+        // Stop build action if is building
+        if (Game.Instance.actions.build.building)
+        {
+            Game.Instance.actions.build.EndBuilding();
+        }
+
         sellWindow.SetActive(true);
         selling = true;
     }
@@ -73,25 +77,55 @@ public class SellAction : MonoBehaviour
 
                 int lastTouchedCardIndex = int.Parse(lastTouchedCard.name);
 
-                PlayerInfo player = Game.Instance.properties.playerDisplay[Game.Instance.playerTurnIndex];
-
                 // Check if we own this card
-                if (player.propertiesOwned.Contains(lastTouchedCardIndex))
+                if (Game.Instance.CurrentPlayer.propertiesOwned.Contains(lastTouchedCardIndex))
                 {
-                    // Remove from owned cards
-                    player.propertiesOwned.Remove(lastTouchedCardIndex);
+                    // Get houses manager
+                    HouseManager manager = Game.Instance.board.boardCardHouses[lastTouchedCardIndex];
 
-                    // Give player money back
-                    player.playerCurrency += Game.Instance.board.cardsPrice[lastTouchedCardIndex].price;
+                    // Check if it has houses or hotels 
+                    if (manager.currHouses > 0 && !manager.cantClickBuy)
+                    {
+                        // Take off house
+                        manager.TakeOffHouses();
 
-                    // Hide ownership
-                    Game.Instance.board.boardPositions[lastTouchedCardIndex].GetComponentInChildren<SpriteRenderer>().enabled = false;
+                        // Get paid
+                        Game.Instance.CurrentPlayer.AddCurrency(manager.housePrice);
 
-                    // Make it available again
-                    Game.Instance.properties.availableCards.Add(lastTouchedCardIndex);
+                        // Refresh Info
+                        Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+                    }
+                    // Else we sell the property
+                    else
+                    {
+                        if (!manager.OthersHaveHouses(lastTouchedCardIndex))
+                        {
+                            // Remove from owned cards
+                            Game.Instance.CurrentPlayer.propertiesOwned.Remove(lastTouchedCardIndex);
 
-                    // Refresh Info
-                    player.RefreshPlayerInfo();
+                            // Give player money back
+                            Game.Instance.CurrentPlayer.AddCurrency(Game.Instance.board.cardsPrice[lastTouchedCardIndex].price);
+
+                            // Hide ownership
+                            Game.Instance.board.boardOwnershipRender[lastTouchedCardIndex].enabled = false;
+
+                            // Make it available again
+                            Game.Instance.properties.availableCards.Add(lastTouchedCardIndex);
+
+                            // Refresh Info
+                            Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+
+                            // Check if we can sell more
+                            CheckOnSellButton();
+
+                            // If we sell a property might be posible not to build
+                            Game.Instance.actions.build.CheckOnBuildButton();
+                        }
+                        else
+                        {
+                            Debug.Log("Other properties have houses, sell them first");
+                        }
+                    }
                 }
             }
         }

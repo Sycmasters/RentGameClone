@@ -36,7 +36,7 @@ public class PropertiesManager : MonoBehaviour
         if(playerDisplay[Game.Instance.playerTurnIndex].playerCurrency >= Game.Instance.board.cardsPrice[cardToBuy].price)
         {
             // Get paid
-            playerDisplay[Game.Instance.playerTurnIndex].playerCurrency -= Game.Instance.board.cardsPrice[cardToBuy].price;
+            playerDisplay[Game.Instance.playerTurnIndex].SubstractCurrency(Game.Instance.board.cardsPrice[cardToBuy].price);
 
             // Remove it from available cards
             int cardIndex = availableCards.IndexOf(cardToBuy);
@@ -47,7 +47,7 @@ public class PropertiesManager : MonoBehaviour
             playerDisplay[Game.Instance.playerTurnIndex].RefreshPlayerInfo();
 
             // Show whose owner
-            SpriteRenderer ownerAvatar = Game.Instance.board.boardPositions[cardToBuy].GetComponentInChildren<SpriteRenderer>();
+            SpriteRenderer ownerAvatar = Game.Instance.board.boardOwnershipRender[cardToBuy];
             ownerAvatar.sprite = playerDisplay[Game.Instance.playerTurnIndex].playerAvatar.sprite;
             ownerAvatar.enabled = true;
 
@@ -56,6 +56,8 @@ public class PropertiesManager : MonoBehaviour
 
             // Check if we can sell now
             Game.Instance.actions.sell.CheckOnSellButton();
+            // Check if we can build houses
+            Game.Instance.actions.build.CheckOnBuildButton();
 
             // Flush data
             cardToBuy = 0;

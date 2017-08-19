@@ -7,5 +7,5 @@ public class PlayerActions : MonoBehaviour
     public TradeAction trade;
     public BuildAction build;
     public SellAction sell;
-    public StartPayAction startPay;
+    public PaymentAction payment;
 }

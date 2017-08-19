@@ -99,11 +99,24 @@ public class Game : MonoBehaviour
             return _actions;
         }
     }
-    private void Start ()
+
+    // CURRENT PLAYER
+    public PlayerInfo CurrentPlayer
+    {
+        get
+        {
+            return properties.playerDisplay[playerTurnIndex]; 
+        }
+    }
+
+    private void Awake()
     {
         // Set singleton
         Instance = this;
+    }
 
+    private void Start ()
+    {
         // Init list of turns
         //playerTurn = new List<int>() { 0, 1, 2, 3, 4}; // This should automatically set
 
@@ -134,16 +147,16 @@ public class Game : MonoBehaviour
         // Now set next turn to start with the first player (player 0)
         NextTurn();
 
-        // Init action buttons
+        // Init actions
         actions.sell.CheckOnSellButton();
         actions.build.CheckOnBuildButton();
 
         // Hide end turn button
-        if(!dontHideTurnBtn)
+        if (!dontHideTurnBtn)
         {
             nextTurnButton.SetActive(false);
         }
-	}
+    }
 
     private void Update()
     {
@@ -152,6 +165,11 @@ public class Game : MonoBehaviour
         {
             MoveToken(testMoveSpaces);
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            NextTurn();
+        }
     }
 
     public void MoveToken (int spaces)
@@ -159,10 +177,10 @@ public class Game : MonoBehaviour
         GetPlayerReference().MoveToken(spaces);
     }
 
-    public void NextTurn ()
+    public void NextTurn()
     {
         // Hide end turn button
-        if(!dontHideTurnBtn)
+        if (!dontHideTurnBtn)
         {
             nextTurnButton.SetActive(false);
         }
@@ -170,29 +188,36 @@ public class Game : MonoBehaviour
         // Allow to roll again
         diceSystem.ResetDices();
 
+        // If selling or building, stop it
+        if (actions.sell.selling) { actions.sell.EndSelling(); }
+        if (actions.build.building) { actions.build.EndBuilding(); }
+
         // If is not last player turn go next
         if(playerTurnIndex < playerTurn.Count - 1)
         {
             // Unfocus last player 
-            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.white;
+            CurrentPlayer.playerInfoButton.color = Color.white;
 
             // Go next player
             playerTurnIndex++;
 
             // Focus next player
-            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.green;
+            CurrentPlayer.playerInfoButton.color = Color.green;
         }
         // If is the last player ending turn, repeat cycle
         else
         {
             // Unfocus last player 
-            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.white;
+            CurrentPlayer.playerInfoButton.color = Color.white;
 
             playerTurnIndex = 0;
 
             // Focus next player
-            properties.playerDisplay[playerTurnIndex].playerInfoButton.color = Color.green;
+            CurrentPlayer.playerInfoButton.color = Color.green;
         }
+
+        // Disable initial payment in case it was active
+        actions.payment.EnableInitialPayment(false);
     }
 
     public void TokenReachedDestination(int currPosition)
@@ -206,7 +231,10 @@ public class Game : MonoBehaviour
         else if(board.cardsSprite[currPosition] != null && !properties.availableCards.Contains(currPosition))
         {
             int ownerIndex = WhoOwnsThisCard(currPosition);
-            PayRent(currPosition, ownerIndex);
+            if (!CurrentPlayer.propertiesOwned.Contains(currPosition))
+            {
+                actions.payment.PayRent(currPosition, ownerIndex);
+            }
         }
 
         // We can end the turn now
@@ -239,24 +267,5 @@ public class Game : MonoBehaviour
         }
 
         return null;
-    }
-
-    private void PayRent (int currPosition, int ownerIndex)
-    {
-        // Charge current player
-        properties.playerDisplay[playerTurnIndex].playerCurrency -= board.cardsPrice[currPosition].rent;
-        properties.playerDisplay[playerTurnIndex].RefreshPlayerInfo();
-        payerAvatar.sprite = properties.playerDisplay[playerTurnIndex].playerAvatar.sprite;
-        payerName.text = properties.playerDisplay[playerTurnIndex].playerName;
-
-        // Pay owner
-        properties.playerDisplay[ownerIndex].playerCurrency += board.cardsPrice[currPosition].rent;
-        properties.playerDisplay[ownerIndex].RefreshPlayerInfo();
-        ownerAvatar.sprite = properties.playerDisplay[ownerIndex].playerAvatar.sprite;
-        ownerName.text = properties.playerDisplay[ownerIndex].playerName;
-
-        // Show amount
-        payAmount.text = "G " + board.cardsPrice[currPosition].rent;
-        getPaidWindow.SetActive(true);
     }
 }

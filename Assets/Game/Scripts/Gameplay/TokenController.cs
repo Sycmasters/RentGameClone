@@ -9,17 +9,17 @@ public class TokenController : MonoBehaviour
     public int playerIndex = 0;
     public int boardLocation = 0;
     
+    [SerializeField]
     private NavMeshAgent agent;
     private bool moving;
 
     // Use this for initialization
-	private void Start ()
+    [ContextMenu("GetReferences")]
+    public void Init ()
     {
-		if(agent == null)
-        {
-            agent = GetComponent<NavMeshAgent>();
-        }
-	}
+        agent = GetComponent<NavMeshAgent>();
+        Debug.Log("Init method in " + gameObject.name);
+    }
 
     public void Update()
     {
@@ -69,6 +69,8 @@ public class TokenController : MonoBehaviour
         }
         else
         {
+            // We surpassed the start point
+            Game.Instance.actions.payment.EnableInitialPayment(true);
             boardLocation = (boardLocation + add) - 40;
         }
     }

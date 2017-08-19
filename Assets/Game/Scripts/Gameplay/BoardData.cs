@@ -16,7 +16,9 @@ public class BoardData : MonoBehaviour
 {
     [Header("Board")]
     public Transform[] boardPositions;
-    
+    public HouseManager[] boardCardHouses;
+    public SpriteRenderer[] boardOwnershipRender;
+
     [Header("Cards")]
     public Sprite[] cardsSprite;
     public CardInfo[] cardsPrice;
@@ -26,7 +28,38 @@ public class BoardData : MonoBehaviour
     public Text cardPrice;
     public Image cardImage;
 
-	private void OnEnable ()
+    [ContextMenu("GetReferences")]
+    public void Init ()
+    {
+        boardCardHouses = new HouseManager[boardPositions.Length];
+        boardOwnershipRender = new SpriteRenderer[boardPositions.Length];
+
+        for(int i = 0; i < boardPositions.Length; i++)
+        {
+            HouseManager manager = boardPositions[i].GetComponentInChildren<HouseManager>();
+            if(manager != null)
+            {
+                boardCardHouses[i] = manager;
+            }
+            else
+            {
+                boardCardHouses[i] = null;
+            }
+
+            SpriteRenderer render = boardPositions[i].GetComponentInChildren<SpriteRenderer>();
+            if(render != null)
+            {
+                boardOwnershipRender[i] = render;
+            }
+            else
+            {
+                boardOwnershipRender[i] = null;
+            }
+        }
+        Debug.Log("Init method in " + gameObject.name);
+    }
+
+    private void OnEnable ()
     {
 		if(TouchManager.Instance != null)
         {
@@ -45,7 +78,7 @@ public class BoardData : MonoBehaviour
     private void OnTouch (object sender, PointerEventArgs e)
     {
         // Don't show properties when selling
-        if(Game.Instance.actions.sell.selling)
+        if(Game.Instance.actions.sell.selling || Game.Instance.actions.build.building)
         {
             return;
         }

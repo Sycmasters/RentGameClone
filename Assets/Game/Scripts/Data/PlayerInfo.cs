@@ -16,9 +16,11 @@ public class PlayerInfo : MonoBehaviour
 
     private Animator anim;
 
-    private void Start()
+    [ContextMenu("GetReferences")]
+    public void Init()
     {
         anim = GetComponent<Animator>();
+        Debug.Log("Init method in " + gameObject.name);
     }
 
     public void SetPlayer (int index)
@@ -42,5 +44,17 @@ public class PlayerInfo : MonoBehaviour
     public void ShowButton (bool show)
     {
         anim.SetBool("Show", show);
+    }
+
+    public void AddCurrency (int addValue)
+    {
+        playerCurrency += addValue;
+        RefreshPlayerInfo();
+    }
+
+    public void SubstractCurrency (int substractValue)
+    {
+        playerCurrency -= substractValue;
+        RefreshPlayerInfo();
     }
 }

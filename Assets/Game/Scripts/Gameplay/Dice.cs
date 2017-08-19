@@ -6,18 +6,21 @@ public class Dice : MonoBehaviour
 {
     public bool rolling, checkValue, checkAgain;
     
+    [SerializeField]
     private Rigidbody rbody;
     public Vector3 originPosition, localYAxis;
     public int shownNumber;
 
+    [ContextMenu("GetReferences")]
+    public void Init ()
+    {
+        rbody = GetComponent<Rigidbody>();
+        Debug.Log("Init method in " + gameObject.name);
+    } 
+
     // Use this for initialization
     void Awake ()
     {
-		if(rbody == null)
-        {
-            rbody = GetComponent<Rigidbody>();
-        }
-
         // Original position
         originPosition = transform.localPosition;
 	}
