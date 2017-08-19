@@ -56,16 +56,22 @@ public class PaymentAction : MonoBehaviour
         }
     }
 
-    public void EnableInitialPayment (bool available)
+    public void EnableInitialPayment ()
     {
-        if (available = false && initialPayment == true)
+        initialPayment = true;
+        initialPaymentButton.interactable = true;
+    }
+
+    public void DisableInitialPayment()
+    {
+        if (initialPayment == true)
         {
             // Set unclaimed money to the free parking
             Debug.Log("Unclaimed initial money");
         }
 
-        initialPayment = available;
-        initialPaymentButton.interactable = available;
+        initialPayment = false;
+        initialPaymentButton.interactable = false;
     }
 
     public void ClaimInitialMoney ()

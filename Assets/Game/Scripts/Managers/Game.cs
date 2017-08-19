@@ -217,7 +217,7 @@ public class Game : MonoBehaviour
         }
 
         // Disable initial payment in case it was active
-        actions.payment.EnableInitialPayment(false);
+        actions.payment.DisableInitialPayment();
     }
 
     public void TokenReachedDestination(int currPosition)

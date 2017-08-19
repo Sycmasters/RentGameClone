@@ -70,7 +70,7 @@ public class TokenController : MonoBehaviour
         else
         {
             // We surpassed the start point
-            Game.Instance.actions.payment.EnableInitialPayment(true);
+            Game.Instance.actions.payment.EnableInitialPayment();
             boardLocation = (boardLocation + add) - 40;
         }
     }
