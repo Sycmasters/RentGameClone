@@ -211,7 +211,8 @@ public class Game : MonoBehaviour
 			{
 				CurrentPlayer.playerInfoButton.color = Color.red;
 				jailWindow.SetActive (true);
-			}
+                dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+            }
         }
         // If is the last player ending turn, repeat cycle
         else
@@ -230,7 +231,8 @@ public class Game : MonoBehaviour
 			{
 				CurrentPlayer.playerInfoButton.color = Color.red;
 				jailWindow.SetActive (true);
-			}
+                dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+            }
         }
 
         // Disable initial payment in case it was active
@@ -259,6 +261,14 @@ public class Game : MonoBehaviour
         {
             nextTurnButton.SetActive(true);
         }
+    }
+
+    public void FreeFromJailWithCard ()
+    {
+        CurrentPlayer.playerJailExitCard--;
+        dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+        GetPlayerReference().FreePlayerFromJail();
+        jailWindow.SetActive(false);
     }
 
     private int WhoOwnsThisCard (int cardIndex)

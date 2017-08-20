@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerInfo : MonoBehaviour
 {
-    public int playerIndex;
-    public int playerCurrency;
+    public int playerIndex, playerCurrency, playerJailExitCard;
     public string playerName;
     public List<int> propertiesOwned;
     public List<int> propertiesMortgaged;

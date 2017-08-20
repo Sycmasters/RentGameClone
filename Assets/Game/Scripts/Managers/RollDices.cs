@@ -6,15 +6,12 @@ using UnityEngine.UI;
 public class RollDices : MonoBehaviour
 {
     public Dice[] dices;
-	public int dicesValue, dicesRolled, pairsRolled;
+	public int dicesValue, dicesRolled, pairsRolled, rollTries;
     public int testValueDice;
 
     public bool alreadyRolled = false;
 
-	public Button rollDiceBtn, useCardBtn;
-
-	[SerializeField]
-	private int rollTries;
+	public Button rollDiceBtn, useCardBtn;    
 
 	// Update is called once per frame
 	void Update ()
@@ -101,19 +98,22 @@ public class RollDices : MonoBehaviour
 			// We tried X times
 			rollTries++;
 
-			// When both dices are rolled then show the final result
-			if(dicesRolled >= 2 && pairsRolled < 3 && !Game.Instance.GetPlayerReference().inJail)
+            Game.Instance.nextTurnButton.SetActive(true);
+
+            // When both dices are rolled then show the final result
+            if (dicesRolled >= 2 && pairsRolled < 3 && !Game.Instance.GetPlayerReference().inJail)
 			{
 				//Debug.Log(dicesValue);
 				Game.Instance.MoveToken(dicesValue);
 				rollTries = 0;
-			}
+                Game.Instance.nextTurnButton.SetActive(false);
+            }
 			else if(dicesRolled >= 2 && rollTries >= 6)
 			{
 				rollDiceBtn.interactable = false;
 				rollTries = 0;
-			}
-		}
+            }
+        }
     }
 
 	public void RollBothDices ()

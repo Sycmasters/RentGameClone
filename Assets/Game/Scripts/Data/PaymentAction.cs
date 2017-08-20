@@ -83,4 +83,13 @@ public class PaymentAction : MonoBehaviour
             initialPaymentButton.interactable = false;
         }
     }
+
+    public void PayToFreeJail ()
+    {
+        Game.Instance.CurrentPlayer.SubstractCurrency(50);
+        Game.Instance.GetPlayerReference().FreePlayerFromJail();
+        Game.Instance.jailWindow.SetActive(false);
+        Game.Instance.dices.rollDiceBtn.interactable = true;
+        Game.Instance.dices.rollTries = 0;
+    }
 }

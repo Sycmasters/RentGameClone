@@ -98,6 +98,5 @@ public class TokenController : MonoBehaviour
     {
         inJail = false;
         Game.Instance.CurrentPlayer.playerInfoButton.color = Color.green;
-		Debug.Log ("Not in jail");
     }
 }
