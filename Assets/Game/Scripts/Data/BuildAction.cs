@@ -91,23 +91,27 @@ public class BuildAction : MonoBehaviour
 
                 int lastTouchedCardIndex = int.Parse(lastTouchedCard.name);
 
-                // Check if we own this card
-                if (Game.Instance.CurrentPlayer.propertiesOwned.Contains(lastTouchedCardIndex))
+                // Check if we have money to buy a house
+                if (Game.Instance.CurrentPlayer.playerCurrency >= Game.Instance.board.cardsPrice[lastTouchedCardIndex].price)
                 {
-                    // Get the manager for this property
-                    HouseManager manager = Game.Instance.board.boardCardHouses[lastTouchedCardIndex];
-
-                    // Build Houses for the prop
-                    if(manager != null && manager.currHouses < 5 && !manager.cantClickBuy)
+                    // Check if we own this card
+                    if (Game.Instance.CurrentPlayer.propertiesOwned.Contains(lastTouchedCardIndex))
                     {
-                        // Buy house
-                        manager.BuyHouses();
+                        // Get the manager for this property
+                        HouseManager manager = Game.Instance.board.boardCardHouses[lastTouchedCardIndex];
 
-                        // Get paid
-                        Game.Instance.CurrentPlayer.SubstractCurrency(manager.housePrice);
+                        // Build Houses for the prop
+                        if (manager != null && manager.currHouses < 5 && !manager.cantClickBuy)
+                        {
+                            // Buy house
+                            manager.BuyHouses();
 
-                        // Refresh Info
-                        Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+                            // Get paid
+                            Game.Instance.CurrentPlayer.SubstractCurrency(manager.housePrice);
+
+                            // Refresh Info
+                            Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+                        }
                     }
                 }
             }

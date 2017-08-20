@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
 
     [Header("---------------")]
     public int playerTurnIndex = 0;
+    public int parkingMoney;
     public bool turnPlayed = false;
 
     [Header("---------------")]
@@ -19,6 +20,7 @@ public class Game : MonoBehaviour
 	[Header("---------------")]
 	public GameObject getPaidWindow;
 	public GameObject jailWindow;
+    public GameObject taxWindow;
     public Image payerAvatar;
     public Image ownerAvatar;
     public Text payerName;
@@ -253,6 +255,31 @@ public class Game : MonoBehaviour
             if (!CurrentPlayer.propertiesOwned.Contains(currPosition))
             {
                 actions.payment.PayRent(currPosition, ownerIndex);
+            }
+        }
+        // If we reached at go to jail
+        else if(currPosition == 30)
+        {
+            // Force player to go to Jail
+            GetPlayerReference().boardLocation = 10; // 10 = Jail
+            GetPlayerReference().MoveToken();
+
+            // Tell player is in jail
+            GetPlayerReference().SetPlayerInJail();
+        }
+        // Pay taxes
+        else if(currPosition == 4 || currPosition == 38)
+        {
+            actions.payment.CheckParkingMoney();
+            
+            // For first tax choose payment method
+            if(currPosition == 4)
+            {
+                taxWindow.SetActive(true);
+            }
+            else
+            {
+                actions.payment.PayTaxesToBank(75);
             }
         }
 
