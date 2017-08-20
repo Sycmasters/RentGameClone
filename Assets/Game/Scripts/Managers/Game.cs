@@ -16,8 +16,9 @@ public class Game : MonoBehaviour
     [Header("---------------")]
     public RollDices diceSystem;
 
-    [Header("---------------")]
-    public GameObject getPaidWindow;
+	[Header("---------------")]
+	public GameObject getPaidWindow;
+	public GameObject jailWindow;
     public Image payerAvatar;
     public Image ownerAvatar;
     public Text payerName;
@@ -206,6 +207,11 @@ public class Game : MonoBehaviour
             {
                 CurrentPlayer.playerInfoButton.color = Color.green;
             }
+			else 
+			{
+				CurrentPlayer.playerInfoButton.color = Color.red;
+				jailWindow.SetActive (true);
+			}
         }
         // If is the last player ending turn, repeat cycle
         else
@@ -215,8 +221,16 @@ public class Game : MonoBehaviour
 
             playerTurnIndex = 0;
 
-            // Focus next player
-            CurrentPlayer.playerInfoButton.color = Color.green;
+			// Focus next player
+			if (!GetPlayerReference().inJail)
+			{
+				CurrentPlayer.playerInfoButton.color = Color.green;
+			}
+			else 
+			{
+				CurrentPlayer.playerInfoButton.color = Color.red;
+				jailWindow.SetActive (true);
+			}
         }
 
         // Disable initial payment in case it was active

@@ -1,33 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RollDices : MonoBehaviour
 {
     public Dice[] dices;
-    public int dicesValue, dicesRolled;
+	public int dicesValue, dicesRolled, pairsRolled;
     public int testValueDice;
 
     public bool alreadyRolled = false;
-    [SerializeField]
-    private int pairsRolled;
+
+	public Button rollDiceBtn, useCardBtn;
+
+	[SerializeField]
+	private int rollTries;
 
 	// Update is called once per frame
 	void Update ()
     {
 		if(Input.GetKeyDown(KeyCode.P) && !alreadyRolled)
         {
-            // Restart value each time dices are going to roll
-            dicesValue = 0;
-            dicesRolled = 0;
-
-            for(int i = 0; i < dices.Length; i++)
-            {
-                // Roll Dices
-                dices[i].RollDice();
-            }
-
-            alreadyRolled = true;
+			RollBothDices ();
         }
         if(Input.GetKeyDown(KeyCode.K))
         {
@@ -43,49 +37,106 @@ public class RollDices : MonoBehaviour
 
     public void AddDiceValue (int val)
     {
-        // We already rolled one
-        if (dicesRolled == 1)
-        {
-            // If we rolled same number
-            if (dicesValue == val)
-            {
-                // Give another roll
-                alreadyRolled = false;
-                pairsRolled++;
-            }
-        }
+		if(!Game.Instance.GetPlayerReference().inJail)
+		{
+	        // We already rolled one
+	        if (dicesRolled == 1)
+	        {
+	            // If we rolled same number
+	            if (dicesValue == val)
+	            {
+	                // Give another roll
+	                alreadyRolled = false;
+	                pairsRolled++;
+	            }
+	        }
 
-        // Increase dice value
-        dicesValue += val;
+	        // Increase dice value
+	        dicesValue += val;
 
-        // Increase rolled dice amount
-        dicesRolled += 1;
+	        // Increase rolled dice amount
+	        dicesRolled += 1;
 
-        // When both dices are rolled then show the final result
-        if(dicesRolled >= 2 && pairsRolled < 3)
-        {
-            //Debug.Log(dicesValue);
-            Game.Instance.MoveToken(dicesValue);
-        }
-        else if(dicesRolled >= 2 && pairsRolled >= 3)
-        {
-            // Get player 
-            TokenController player = Game.Instance.GetPlayerReference();
+	        // When both dices are rolled then show the final result
+	        if(dicesRolled >= 2 && pairsRolled < 3)
+	        {
+	            //Debug.Log(dicesValue);
+	            Game.Instance.MoveToken(dicesValue);
+	        }
+	        else if(dicesRolled >= 2 && pairsRolled >= 3)
+	        {
+	            // Get player 
+	            TokenController player = Game.Instance.GetPlayerReference();
 
-            // Force player to go to Jail
-            player.boardLocation = 10; // 10 = Jail
-            player.MoveToken();
+	            // Force player to go to Jail
+	            player.boardLocation = 10; // 10 = Jail
+	            player.MoveToken();
 
-            // Tell player is in jail
-            player.SetPlayerInJail();
-        }
+	            // Tell player is in jail
+	            player.SetPlayerInJail();
+	        }
+		}
+		else
+		{
+			// We already rolled one
+			if (dicesRolled == 1) 
+			{
+				// If we rolled same number
+				if (dicesValue == val) 
+				{
+					// Get out of jail and roll again
+					Game.Instance.GetPlayerReference ().FreePlayerFromJail ();
+
+					alreadyRolled = false;
+					pairsRolled++;
+				}
+			}
+
+			// Increase dice value
+			dicesValue += val;
+
+			// Increase rolled dice amount
+			dicesRolled += 1;
+
+			// We tried X times
+			rollTries++;
+
+			// When both dices are rolled then show the final result
+			if(dicesRolled >= 2 && pairsRolled < 3 && !Game.Instance.GetPlayerReference().inJail)
+			{
+				//Debug.Log(dicesValue);
+				Game.Instance.MoveToken(dicesValue);
+				rollTries = 0;
+			}
+			else if(dicesRolled >= 2 && rollTries >= 6)
+			{
+				rollDiceBtn.interactable = false;
+				rollTries = 0;
+			}
+		}
     }
+
+	public void RollBothDices ()
+	{
+		// Restart value each time dices are going to roll
+		dicesValue = 0;
+		dicesRolled = 0;
+
+		for(int i = 0; i < dices.Length; i++)
+		{
+			// Roll Dices
+			dices[i].RollDice();
+		}
+
+		alreadyRolled = true;
+	}
 
     public void ResetDices ()
     {
         // Restart value each time dices are going to roll
         dicesValue = 0;
         dicesRolled = 0;
+		pairsRolled = 0;
 
         for (int i = 0; i < dices.Length; i++)
         {
