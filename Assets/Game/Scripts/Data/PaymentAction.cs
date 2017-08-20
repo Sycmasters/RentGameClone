@@ -70,7 +70,8 @@ public class PaymentAction : MonoBehaviour
         if (initialPayment == true)
         {
             // Set unclaimed money to the free parking
-            Debug.Log("Unclaimed initial money");
+            Game.Instance.parkingMoney += 200;
+            CheckParkingMoney();
         }
 
         initialPayment = false;

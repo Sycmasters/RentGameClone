@@ -282,6 +282,13 @@ public class Game : MonoBehaviour
                 actions.payment.PayTaxesToBank(75);
             }
         }
+        // Win parking money
+        else if(currPosition == 20)
+        {
+            CurrentPlayer.AddCurrency(parkingMoney);
+            parkingMoney = 0;
+            actions.payment.CheckParkingMoney();
+        }
 
         // We can end the turn now
         if (dices.alreadyRolled)

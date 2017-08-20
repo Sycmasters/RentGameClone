@@ -54,6 +54,8 @@ public class TokenController : MonoBehaviour
         // Set the point at where we have to move to
         SetNextLocation(spaces);
 
+        Debug.Log(boardLocation);
+
         // Move token with NavMesh
         Vector3 boardPos = Game.Instance.board.boardPositions[boardLocation].position;
         // Need to set the y value of Vector 2 on board pos as new destination of token in Z
@@ -76,7 +78,7 @@ public class TokenController : MonoBehaviour
 
     private void SetNextLocation(int add)
     {
-        if ((boardLocation + add) < 39)
+        if ((boardLocation + add) <= 39)
         {
             boardLocation += add;
         }
