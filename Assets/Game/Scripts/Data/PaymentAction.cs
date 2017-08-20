@@ -33,9 +33,55 @@ public class PaymentAction : MonoBehaviour
         Game.Instance.getPaidWindow.SetActive(true);
     }
 
+    public void PayWhatDicesSay (int dicesValue)
+    {
+        // First check how many services we have
+        int servicesAmount = 0;
+        // What services are we implementing, if any or both
+        int cardToCheck = Game.Instance.WhoOwnsThisCard(12) == -1 ? 28 : 12;
+        // Who is the owner of this service(s)
+        int ownerIndex = Game.Instance.WhoOwnsThisCard(cardToCheck);
+
+        if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(12)) { servicesAmount++; }
+        if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(28)) { servicesAmount++; }
+
+        int totalToMultiply = Game.Instance.board.cardsPrice[cardToCheck].withProp[servicesAmount - 1];
+
+        // Charge Player
+        Game.Instance.CurrentPlayer.SubstractCurrency(dicesValue * totalToMultiply);
+        Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+        Game.Instance.payerAvatar.sprite = Game.Instance.CurrentPlayer.playerAvatar.sprite;
+        Game.Instance.payerName.text = Game.Instance.CurrentPlayer.playerName;
+
+        // Pay owner
+        Game.Instance.properties.playerDisplay[ownerIndex].AddCurrency(dicesValue * totalToMultiply);
+        Game.Instance.properties.playerDisplay[ownerIndex].RefreshPlayerInfo();
+        Game.Instance.ownerAvatar.sprite = Game.Instance.properties.playerDisplay[ownerIndex].playerAvatar.sprite;
+        Game.Instance.ownerName.text = Game.Instance.properties.playerDisplay[ownerIndex].playerName;
+
+        // Show amount
+        Game.Instance.payAmount.text = "G " + dicesValue * totalToMultiply;
+        Game.Instance.getPaidWindow.SetActive(true);
+
+        // No pay anymore for service
+        Game.Instance.payingService = false;
+    }
+
     public int HowMuchToPay (int currPosition, int ownerIndex)
     {
-        // First check if there are houses on the property
+        // First check if is a special card, like transportation
+        if(currPosition == 5 || currPosition == 15 || currPosition == 25 || currPosition == 35)
+        {
+            // How many of these we have
+            int transportationPossesed = 0;
+            if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(5)) { transportationPossesed++; }
+            if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(15)) { transportationPossesed++; }
+            if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(25)) { transportationPossesed++; }
+            if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(35)) { transportationPossesed++; }
+
+            return Game.Instance.board.cardsPrice[currPosition].withProp[transportationPossesed-1];
+        }
+        // Then check if there are houses on the property
         if (Game.Instance.board.boardCardHouses[currPosition].currHouses > 0)
         {
             // Charge current player for number of houses

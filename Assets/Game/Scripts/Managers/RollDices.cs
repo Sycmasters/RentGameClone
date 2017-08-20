@@ -116,7 +116,23 @@ public class RollDices : MonoBehaviour
         }
     }
 
-	public void RollBothDices ()
+    public void PayForAService(int val)
+    {
+        // Increase dice value
+        dicesValue += val;
+
+        // Increase rolled dice amount
+        dicesRolled += 1;
+
+        // When both dices are rolled then show the final result
+        if (dicesRolled >= 2)
+        {
+            //Debug.Log(dicesValue);
+            Game.Instance.actions.payment.PayWhatDicesSay(dicesValue);
+        }
+    }
+
+    public void RollBothDices ()
 	{
 		// Restart value each time dices are going to roll
 		dicesValue = 0;
@@ -128,7 +144,10 @@ public class RollDices : MonoBehaviour
 			dices[i].RollDice();
 		}
 
-		alreadyRolled = true;
+        if(!Game.Instance.payingService)
+        {
+            alreadyRolled = true;
+        }
 	}
 
     public void ResetDices ()

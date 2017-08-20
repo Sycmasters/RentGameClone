@@ -51,7 +51,16 @@ public class Dice : MonoBehaviour
                 if (shownNumber > 0)
                 {
                     //Debug.Log(gameObject.name + " result " + shownNumber + " local " + localYAxis);
-                    Game.Instance.dices.AddDiceValue(shownNumber);
+                    if(!Game.Instance.payingService)
+                    {
+                        // We are moving the player
+                        Game.Instance.dices.AddDiceValue(shownNumber);
+                    }
+                    else
+                    {
+                        // We are paying for a service
+                        Game.Instance.dices.PayForAService(shownNumber);
+                    }
                 }
                 else
                 {

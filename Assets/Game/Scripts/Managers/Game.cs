@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
     [Header("---------------")]
     public int playerTurnIndex = 0;
     public int parkingMoney;
-    public bool turnPlayed = false;
+    public bool turnPlayed = false, payingService = false;
 
     [Header("---------------")]
     public RollDices diceSystem;
@@ -254,7 +254,17 @@ public class Game : MonoBehaviour
             int ownerIndex = WhoOwnsThisCard(currPosition);
             if (!CurrentPlayer.propertiesOwned.Contains(currPosition))
             {
-                actions.payment.PayRent(currPosition, ownerIndex);
+                // Need to pay for services so we need to roll dices first
+                if (currPosition == 12 || currPosition == 28)
+                {
+                    payingService = true;
+                    dices.RollBothDices();
+                }
+                // We are paying any other kind of card
+                else
+                {
+                    actions.payment.PayRent(currPosition, ownerIndex);
+                }
             }
         }
         // If we reached at go to jail
@@ -305,7 +315,7 @@ public class Game : MonoBehaviour
         jailWindow.SetActive(false);
     }
 
-    private int WhoOwnsThisCard (int cardIndex)
+    public int WhoOwnsThisCard (int cardIndex)
     {
         for(int i = 0; i < properties.playerDisplay.Count; i++)
         {

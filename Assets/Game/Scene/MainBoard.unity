@@ -1634,11 +1634,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 314656215}
---- !u!212 &326181308 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 212069378744790210, guid: 4192a597b00b4a84294202427862d959,
-    type: 2}
-  m_PrefabInternal: {fileID: 712705719}
 --- !u!1 &340575970
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,7 +4057,7 @@ Prefab:
         type: 2}
       propertyPath: boardOwnershipRender.Array.data[11]
       value: 
-      objectReference: {fileID: 326181308}
+      objectReference: {fileID: 754860617}
     - target: {fileID: 114823761912760944, guid: 4192a597b00b4a84294202427862d959,
         type: 2}
       propertyPath: boardOwnershipRender.Array.data[12]
@@ -4168,7 +4163,8 @@ Prefab:
       propertyPath: boardOwnershipRender.Array.data[39]
       value: 
       objectReference: {fileID: 1767345346}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 212069378744790210, guid: 4192a597b00b4a84294202427862d959, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4192a597b00b4a84294202427862d959, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &712705720 stripped
@@ -4445,6 +4441,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1468119867}
   m_Script: {fileID: 11500000, guid: 3ef48561851b6fa43bbb1a6ed2cc3a2e, type: 3}
+--- !u!212 &754860617 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212425946067797282, guid: 4192a597b00b4a84294202427862d959,
+    type: 2}
+  m_PrefabInternal: {fileID: 712705719}
 --- !u!1001 &785567539
 Prefab:
   m_ObjectHideFlags: 0
