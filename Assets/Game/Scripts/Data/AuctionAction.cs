@@ -191,4 +191,10 @@ public class AuctionAction : MonoBehaviour
 
         return returnValue;
     }
+
+    public void IncreaseDecreaseVal (int val)
+    {
+        moneySlider.value += val;
+        moneyDisplay.text = "G " + moneySlider.value;
+    }
 }
