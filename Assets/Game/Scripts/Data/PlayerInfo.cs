@@ -26,9 +26,10 @@ public class PlayerInfo : MonoBehaviour
     {
         playerIndex = Game.Instance.playerTurn[index];
         playerCurrency = GameSettings.initialCurrency;
-        playerName = "Player " + (playerIndex + 1) + " \nG " + playerCurrency;
+        //playerName = "Player " + (playerIndex + 1) + " \nG " + playerCurrency;
+        playerName = "Player " + (playerIndex + 1);
 
-        playerLabel.text = playerName;
+        playerLabel.text = playerName + " \nG " + playerCurrency;
         playerAvatar.sprite = Game.Instance.playerAvatar[index];
         playerInfoButton = GetComponent<Image>();
         gameObject.SetActive(true);
@@ -36,8 +37,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void RefreshPlayerInfo ()
     {
-        playerName = "Player " + (playerIndex + 1) + " \nG " + playerCurrency;
-        playerLabel.text = playerName;
+        playerLabel.text = playerName + " \nG " + playerCurrency;
     }
 
     public void ShowButton (bool show)

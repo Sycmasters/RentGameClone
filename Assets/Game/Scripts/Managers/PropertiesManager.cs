@@ -13,7 +13,7 @@ public class PropertiesManager : MonoBehaviour
     public Button cardBuyButton;
 
     public List<int> availableCards = new List<int>();
-    private int cardToBuy;
+    public int cardToBuy;
 
 
     public void OpenSellWindow (int index)

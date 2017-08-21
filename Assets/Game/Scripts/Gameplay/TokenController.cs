@@ -54,7 +54,7 @@ public class TokenController : MonoBehaviour
         // Set the point at where we have to move to
         SetNextLocation(spaces);
 
-        Debug.Log(boardLocation);
+        //Debug.Log(boardLocation);
 
         // Move token with NavMesh
         Vector3 boardPos = Game.Instance.board.boardPositions[boardLocation].position;
