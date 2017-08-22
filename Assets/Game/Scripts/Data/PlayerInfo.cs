@@ -13,6 +13,11 @@ public class PlayerInfo : MonoBehaviour
     public Image playerAvatar;
     public Image playerInfoButton;
 
+    public GameObject minicardsWindow;
+    public Image[] minicards;
+    public Image minicardAvatar;
+    public Text minicardText;
+
     private Animator anim;
 
     [ContextMenu("GetReferences")]
@@ -62,6 +67,28 @@ public class PlayerInfo : MonoBehaviour
         if(!Game.Instance.actions.trade.trading)
         {
             // Show properties
+            for (int i = 0; i < minicards.Length; i++)
+            {
+                // Show data
+                minicardAvatar.sprite = playerAvatar.sprite;
+                minicardText.text = playerName;
+
+                // Show if available
+                if (minicards[i] != null)
+                {
+                    if (Game.Instance.properties.playerDisplay[Game.Instance.playerTurn.IndexOf(playerIndex)].propertiesOwned.Contains(i))
+                    {
+                        minicards[i].color = Color.white;
+                    }
+
+                    else
+                    {
+                        minicards[i].color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+                    }
+                }
+            }
+
+            minicardsWindow.SetActive(true);
         }
         else
         {

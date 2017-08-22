@@ -71,7 +71,11 @@ public class RollDices : MonoBehaviour
 
 	            // Tell player is in jail
 	            player.SetPlayerInJail();
-	        }
+
+                // End of the turn
+                Game.Instance.nextTurnButton.SetActive(false);
+                alreadyRolled = true;
+            }
 		}
 		else
 		{
