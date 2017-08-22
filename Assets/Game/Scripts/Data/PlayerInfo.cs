@@ -56,4 +56,23 @@ public class PlayerInfo : MonoBehaviour
         playerCurrency -= substractValue;
         RefreshPlayerInfo();
     }
+
+    public void ShowPlayerInfo ()
+    {
+        if(!Game.Instance.actions.trade.trading)
+        {
+            // Show properties
+        }
+        else
+        {
+            if (Game.Instance.playerTurn.IndexOf(playerIndex) == Game.Instance.playerTurnIndex)
+            {
+                return;
+            }
+
+            // Choose for trade
+            Game.Instance.actions.trade.InitDataWhenOpen(Game.Instance.playerTurn.IndexOf(playerIndex));
+            Game.Instance.actions.trade.blackScreen.SetActive(false);
+        }
+    }
 }
