@@ -78,7 +78,8 @@ public class BoardData : MonoBehaviour
     private void OnTouch (object sender, PointerEventArgs e)
     {
         // Don't show properties when selling
-        if(Game.Instance.actions.sell.selling || Game.Instance.actions.build.building)
+        if(Game.Instance.actions.sell.selling || Game.Instance.actions.build.building || 
+            Game.Instance.actions.trade.trading || Game.Instance.actions.surpriseCards.shown || Game.Instance.actions.questCards.shown)
         {
             return;
         }

@@ -8,4 +8,6 @@ public class PlayerActions : MonoBehaviour
     public BuildAction build;
     public SellAction sell;
     public PaymentAction payment;
+    public SurpriseQuestCards surpriseCards;
+    public SurpriseQuestCards questCards;
 }

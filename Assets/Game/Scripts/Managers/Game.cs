@@ -16,6 +16,8 @@ public class Game : MonoBehaviour
 
     [Header("---------------")]
     public RollDices diceSystem;
+    public SurpriseQuestCards surprise;
+    public SurpriseQuestCards quest;
 
 	[Header("---------------")]
 	public GameObject getPaidWindow;
@@ -175,7 +177,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void MoveToken (int spaces)
+    public void MoveToken(int spaces)
     {
         GetPlayerReference().MoveToken(spaces);
     }
@@ -247,6 +249,9 @@ public class Game : MonoBehaviour
         if(board.cardsSprite[currPosition] != null && properties.availableCards.Contains(currPosition))
         {
             properties.OpenSellWindow(currPosition);
+            // Clean any undesired data just in case
+            actions.payment.payDoubleTransport = false;
+            actions.payment.payTenTimes = false;
         }
         // This card is possesed by someone 
         else if(board.cardsSprite[currPosition] != null && !properties.availableCards.Contains(currPosition))
@@ -298,6 +303,16 @@ public class Game : MonoBehaviour
             CurrentPlayer.AddCurrency(parkingMoney);
             parkingMoney = 0;
             actions.payment.CheckParkingMoney();
+        }
+        else if(currPosition == 2 || currPosition == 17 || currPosition == 33)
+        {
+            // Surprise!
+            surprise.ShowCard();
+        }
+        else if (currPosition == 7 || currPosition == 22 || currPosition == 36)
+        {
+            // Quest!
+            quest.ShowCard();
         }
 
         // We can end the turn now

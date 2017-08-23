@@ -11,6 +11,10 @@ public class PaymentAction : MonoBehaviour
     public TextMesh parkingMoneyLabel;
     public GameObject parkingMoneyObject;
 
+    // Outside of this script
+    public bool payDoubleTransport;
+    public bool payTenTimes;
+
     public void PayRent(int currPosition, int ownerIndex)
     {
         // How much will the rent be
@@ -45,7 +49,16 @@ public class PaymentAction : MonoBehaviour
         if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(12)) { servicesAmount++; }
         if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(28)) { servicesAmount++; }
 
-        int totalToMultiply = Game.Instance.board.cardsPrice[cardToCheck].withProp[servicesAmount - 1];
+        int totalToMultiply = 0;
+
+        if (!payTenTimes)
+        {
+            totalToMultiply = Game.Instance.board.cardsPrice[cardToCheck].withProp[servicesAmount - 1];
+        }
+        else
+        {
+            totalToMultiply = Game.Instance.board.cardsPrice[cardToCheck].withProp[1];
+        }
 
         // Charge Player
         Game.Instance.CurrentPlayer.SubstractCurrency(dicesValue * totalToMultiply);
@@ -65,6 +78,7 @@ public class PaymentAction : MonoBehaviour
 
         // No pay anymore for service
         Game.Instance.payingService = false;
+        payTenTimes = false;
     }
 
     public int HowMuchToPay (int currPosition, int ownerIndex)
@@ -79,7 +93,16 @@ public class PaymentAction : MonoBehaviour
             if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(25)) { transportationPossesed++; }
             if (Game.Instance.properties.playerDisplay[ownerIndex].propertiesOwned.Contains(35)) { transportationPossesed++; }
 
-            return Game.Instance.board.cardsPrice[currPosition].withProp[transportationPossesed-1];
+            if(payDoubleTransport)
+            {
+                payDoubleTransport = false;
+                return Game.Instance.board.cardsPrice[currPosition].withProp[transportationPossesed - 1] * 2;
+            }
+            else
+            {
+                payDoubleTransport = false;
+                return Game.Instance.board.cardsPrice[currPosition].withProp[transportationPossesed - 1];
+            }
         }
         // Then check if there are houses on the property
         if (Game.Instance.board.boardCardHouses[currPosition].currHouses > 0)
