@@ -126,6 +126,7 @@ public class SellAction : MonoBehaviour
                             Debug.Log("Other properties have houses, sell them first");
                         }
                     }
+                    Game.Instance.actions.payment.CheckIfIStillNeedToPay();
                 }
             }
         }

@@ -289,6 +289,8 @@ public class TradeAction : MonoBehaviour
             Game.Instance.properties.playerDisplay[tradePlayerIndex].SubstractCurrency((int)playerToSlider.value);
             Game.Instance.properties.playerDisplay[tradePlayerIndex].AddCurrency((int)playerFromSlider.value);
 
+            Game.Instance.actions.payment.CheckIfIStillNeedToPay();
+
             // Set windows false
             tradeWindow.SetActive(false);
         }
@@ -306,5 +308,6 @@ public class TradeAction : MonoBehaviour
 
             // Show window for other player on online
         }
+        Game.Instance.actions.payment.CheckIfIStillNeedToPay();
     }
 }

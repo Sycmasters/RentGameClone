@@ -15,10 +15,24 @@ public class PaymentAction : MonoBehaviour
     public bool payDoubleTransport;
     public bool payTenTimes;
 
+    public int stillNeedToPay;
+    public int whoIOwe;
+
     public void PayRent(int currPosition, int ownerIndex)
     {
         // How much will the rent be
         int rent = HowMuchToPay(currPosition, ownerIndex);
+
+        // Pay owner
+        if(rent > Game.Instance.CurrentPlayer.playerCurrency)
+        {
+            Game.Instance.properties.playerDisplay[ownerIndex].AddCurrency(Game.Instance.CurrentPlayer.playerCurrency);
+            stillNeedToPay = rent - Game.Instance.CurrentPlayer.playerCurrency;
+            whoIOwe = ownerIndex;
+        }
+        Game.Instance.properties.playerDisplay[ownerIndex].RefreshPlayerInfo();
+        Game.Instance.ownerAvatar.sprite = Game.Instance.properties.playerDisplay[ownerIndex].playerAvatar.sprite;
+        Game.Instance.ownerName.text = Game.Instance.properties.playerDisplay[ownerIndex].playerName;
 
         // Charge Player
         Game.Instance.CurrentPlayer.SubstractCurrency(rent);
@@ -26,11 +40,6 @@ public class PaymentAction : MonoBehaviour
         Game.Instance.payerAvatar.sprite = Game.Instance.CurrentPlayer.playerAvatar.sprite;
         Game.Instance.payerName.text = Game.Instance.CurrentPlayer.playerName;
 
-        // Pay owner
-        Game.Instance.properties.playerDisplay[ownerIndex].AddCurrency(rent);
-        Game.Instance.properties.playerDisplay[ownerIndex].RefreshPlayerInfo();
-        Game.Instance.ownerAvatar.sprite = Game.Instance.properties.playerDisplay[ownerIndex].playerAvatar.sprite;
-        Game.Instance.ownerName.text = Game.Instance.properties.playerDisplay[ownerIndex].playerName;
 
         // Show amount
         Game.Instance.payAmount.text = "G " + rent;
@@ -125,6 +134,31 @@ public class PaymentAction : MonoBehaviour
                 // Charge current player for normal rent 
                 return Game.Instance.board.cardsPrice[currPosition].rent;
             }
+        }
+    }
+
+    public void CheckIfIStillNeedToPay()
+    {
+        if(stillNeedToPay > 0 && Game.Instance.CurrentPlayer.playerCurrency < 0 && Game.Instance.CurrentPlayer.playerCurrency != stillNeedToPay)
+        {
+            Game.Instance.properties.playerDisplay[whoIOwe].AddCurrency(Mathf.Abs(stillNeedToPay + Game.Instance.CurrentPlayer.playerCurrency));
+            stillNeedToPay -= Mathf.Abs(stillNeedToPay + Game.Instance.CurrentPlayer.playerCurrency);
+            Game.Instance.properties.playerDisplay[whoIOwe].RefreshPlayerInfo();
+            if (stillNeedToPay <= 0)
+            {
+                stillNeedToPay = 0;
+                whoIOwe = 0;
+            }
+        }
+        else if(stillNeedToPay > 0 && Game.Instance.CurrentPlayer.playerCurrency > 0)
+        {
+            Game.Instance.properties.playerDisplay[whoIOwe].AddCurrency(stillNeedToPay);
+            Game.Instance.CurrentPlayer.SubstractCurrency(stillNeedToPay);
+            Game.Instance.properties.playerDisplay[whoIOwe].RefreshPlayerInfo();
+            Game.Instance.CurrentPlayer.RefreshPlayerInfo();
+
+            stillNeedToPay = 0;
+            whoIOwe = 0;;
         }
     }
 

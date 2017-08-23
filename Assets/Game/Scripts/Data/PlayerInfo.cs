@@ -17,14 +17,26 @@ public class PlayerInfo : MonoBehaviour
     public Image[] minicards;
     public Image minicardAvatar;
     public Text minicardText;
-
-    private Animator anim;
+    
+    [SerializeField]
+    private Button thisBtn;
+    public bool gameOver;
 
     [ContextMenu("GetReferences")]
     public void Init()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
+        thisBtn = GetComponent<Button>();
         Debug.Log("Init method in " + gameObject.name);
+    }
+
+    private void Update()
+    {
+        if (Game.Instance.playerTurnIndex == Game.Instance.playerTurn.IndexOf(playerIndex))
+        {
+            Game.Instance.bankruptcyButton.SetActive(!gameOver && playerCurrency <= 0);
+        }
+        thisBtn.interactable = !gameOver;
     }
 
     public void SetPlayer (int index)
@@ -47,7 +59,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void ShowButton (bool show)
     {
-        anim.SetBool("Show", show);
+        //anim.SetBool("Show", show);
     }
 
     public void AddCurrency (int addValue)

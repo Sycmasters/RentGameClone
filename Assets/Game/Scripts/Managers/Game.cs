@@ -19,8 +19,8 @@ public class Game : MonoBehaviour
     public SurpriseQuestCards surprise;
     public SurpriseQuestCards quest;
 
-	[Header("---------------")]
-	public GameObject getPaidWindow;
+    [Header("---------------")]
+    public GameObject getPaidWindow;
 	public GameObject jailWindow;
     public GameObject taxWindow;
     public Image payerAvatar;
@@ -29,6 +29,12 @@ public class Game : MonoBehaviour
     public Text ownerName;
     public Text payAmount;
     public GameObject nextTurnButton;
+    public GameObject bankruptcyButton;
+
+    [Header("---------------")]
+    public GameObject gameOverWindow;
+    public Text winnerName;
+    public Image winnerAvatar;
 
     public static Game Instance;
 
@@ -124,7 +130,6 @@ public class Game : MonoBehaviour
     {
         // Init list of turns
         //playerTurn = new List<int>() { 0, 1, 2, 3, 4}; // This should automatically set
-
         // Randomly set the order of players turn (Shuffle orders)
         for(int i = 0; i < playerTurn.Count; i++)
         {
@@ -148,6 +153,7 @@ public class Game : MonoBehaviour
 
         // This is for the focus effect on buttons
         // We need to start in the last to focus the first
+        //Debug.Log(playerTurn.Count - 1);
         playerTurnIndex = playerTurn.Count - 1;
         // Now set next turn to start with the first player (player 0)
         NextTurn();
@@ -181,6 +187,15 @@ public class Game : MonoBehaviour
     {
         GetPlayerReference().MoveToken(spaces);
     }
+    
+    public void Bankruptcy ()
+    {
+        CurrentPlayer.gameOver = true;
+        GetPlayerReference().gameObject.SetActive(false);
+        bankruptcyButton.SetActive(false);
+        CheckOnWinner();
+        NextTurn();
+    }
 
     public void NextTurn()
     {
@@ -196,9 +211,10 @@ public class Game : MonoBehaviour
         // If selling or building, stop it
         if (actions.sell.selling) { actions.sell.EndSelling(); }
         if (actions.build.building) { actions.build.EndBuilding(); }
+        if (actions.trade.trading) { actions.trade.EndTrading(); }
 
         // If is not last player turn go next
-        if(playerTurnIndex < playerTurn.Count - 1)
+        if (playerTurnIndex < playerTurn.Count-1)
         {
             // Unfocus last player 
             CurrentPlayer.playerInfoButton.color = Color.white;
@@ -206,16 +222,24 @@ public class Game : MonoBehaviour
             // Go next player
             playerTurnIndex++;
 
-            // Focus next player
-            if (!GetPlayerReference().inJail)
+            // Continue with next it this is not participating anymore
+            if (!CurrentPlayer.gameOver)
             {
-                CurrentPlayer.playerInfoButton.color = Color.green;
+                // Focus next player
+                if (!GetPlayerReference().inJail)
+                {
+                    CurrentPlayer.playerInfoButton.color = Color.green;
+                }
+                else
+                {
+                    CurrentPlayer.playerInfoButton.color = Color.red;
+                    jailWindow.SetActive(true);
+                    dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+                }
             }
-			else 
-			{
-				CurrentPlayer.playerInfoButton.color = Color.red;
-				jailWindow.SetActive (true);
-                dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+            else
+            {
+                NextTurn();
             }
         }
         // If is the last player ending turn, repeat cycle
@@ -226,21 +250,59 @@ public class Game : MonoBehaviour
 
             playerTurnIndex = 0;
 
-			// Focus next player
-			if (!GetPlayerReference().inJail)
-			{
-				CurrentPlayer.playerInfoButton.color = Color.green;
-			}
-			else 
-			{
-				CurrentPlayer.playerInfoButton.color = Color.red;
-				jailWindow.SetActive (true);
-                dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+            // Continue with next it this is not participating anymore
+            if (!CurrentPlayer.gameOver)
+            {
+                // Focus next player
+                if (!GetPlayerReference().inJail)
+                {
+                    CurrentPlayer.playerInfoButton.color = Color.green;
+                }
+                else
+                {
+                    CurrentPlayer.playerInfoButton.color = Color.red;
+                    jailWindow.SetActive(true);
+                    dices.useCardBtn.interactable = CurrentPlayer.playerJailExitCard > 0;
+                }
+            }
+            else
+            {
+                NextTurn();
             }
         }
 
         // Disable initial payment in case it was active
         actions.payment.DisableInitialPayment();
+    }
+
+    private void CheckOnWinner ()
+    {
+        int playerLeft = 0;
+        int winner = 0;
+
+        for(int i = 0; i < playerTurn.Count; i++)
+        {
+            if (properties.playerDisplay[i].gameOver)
+            {
+                playerLeft++;
+            }
+            else
+            {
+                winner = i;
+            }
+        }
+
+        if (playerLeft >= Game.Instance.playerTurn.Count - 1)
+        {
+            winnerName.text = properties.playerDisplay[winner].playerName;
+            winnerAvatar.sprite = properties.playerDisplay[winner].playerAvatar.sprite;
+            gameOverWindow.SetActive(true);
+        }
+    }
+
+    public void QuitButton ()
+    {
+        Application.Quit();
     }
 
     public void TokenReachedDestination(int currPosition)
