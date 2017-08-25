@@ -7,7 +7,6 @@ public class PlayerInfo : MonoBehaviour
     public int playerIndex, playerCurrency, playerJailExitCard;
     public string playerName;
     public List<int> propertiesOwned;
-    public List<int> propertiesMortgaged;
 
     public Text playerLabel;
     public Image playerAvatar;

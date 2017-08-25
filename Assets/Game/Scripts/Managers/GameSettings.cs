@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class GameSettings 
 {
-    public const int initialCurrency = 100;
-    public const bool mortgage = false;
+    public const int initialCurrency = 1500;
 }

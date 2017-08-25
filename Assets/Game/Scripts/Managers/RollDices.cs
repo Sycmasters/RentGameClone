@@ -89,7 +89,7 @@ public class RollDices : MonoBehaviour
 					Game.Instance.GetPlayerReference ().FreePlayerFromJail ();
 
 					alreadyRolled = false;
-					pairsRolled++;
+                    pairsRolled++;
 				}
 			}
 
@@ -169,5 +169,6 @@ public class RollDices : MonoBehaviour
 
         // Can roll again
         alreadyRolled = false;
+        Game.Instance.rollDicesButton.SetActive(true);
     }
 }

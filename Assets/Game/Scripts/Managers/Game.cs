@@ -29,6 +29,7 @@ public class Game : MonoBehaviour
     public Text ownerName;
     public Text payAmount;
     public GameObject nextTurnButton;
+    public GameObject rollDicesButton;
     public GameObject bankruptcyButton;
 
     [Header("---------------")]
@@ -165,6 +166,7 @@ public class Game : MonoBehaviour
         // Hide end turn button
         if (!dontHideTurnBtn)
         {
+            rollDicesButton.SetActive(true);
             nextTurnButton.SetActive(false);
         }
     }
@@ -199,6 +201,7 @@ public class Game : MonoBehaviour
 
     public void NextTurn()
     {
+        rollDicesButton.SetActive(true);
         // Hide end turn button
         if (!dontHideTurnBtn)
         {
@@ -380,7 +383,13 @@ public class Game : MonoBehaviour
         // We can end the turn now
         if (dices.alreadyRolled)
         {
+            rollDicesButton.SetActive(false);
             nextTurnButton.SetActive(true);
+        }
+        else
+        {
+            rollDicesButton.SetActive(true);
+            nextTurnButton.SetActive(false);
         }
     }
 
