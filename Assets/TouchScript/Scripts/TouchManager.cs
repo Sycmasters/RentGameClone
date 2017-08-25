@@ -24,7 +24,7 @@ namespace TouchScript
     /// <para>Though it's not required it is a convenient way to configure <b>TouchScript</b> for your scene. You can use different configuration options for different scenes.</para>
     /// </remarks>
     [AddComponentMenu("TouchScript/Touch Manager")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_TouchManager.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_TouchManager.htm")]
     public sealed class TouchManager : DebuggableMonoBehaviour
     {
         #region Constants

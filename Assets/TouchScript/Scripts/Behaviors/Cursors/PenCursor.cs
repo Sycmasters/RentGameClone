@@ -13,7 +13,7 @@ namespace TouchScript.Behaviors.Cursors
     /// <summary>
     /// Cursor for pen pointers.
     /// </summary>
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Cursors_PenCursor.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Cursors_PenCursor.htm")]
     public class PenCursor : TextPointerCursor<PenPointer>
     {
         #region Public properties

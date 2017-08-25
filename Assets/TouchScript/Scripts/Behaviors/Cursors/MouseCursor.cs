@@ -13,7 +13,7 @@ namespace TouchScript.Behaviors.Cursors
     /// <summary>
     /// Cursor for mouse pointers.
     /// </summary>
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Cursors_MouseCursor.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Cursors_MouseCursor.htm")]
     public class MouseCursor : TextPointerCursor<MousePointer>
     {
         #region Public properties

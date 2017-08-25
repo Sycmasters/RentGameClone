@@ -15,7 +15,7 @@ namespace TouchScript.Gestures
     /// Converts Pointer events for target object into separate events to be used somewhere else.
     /// </summary>
     [AddComponentMenu("TouchScript/Gestures/Meta Gesture")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_MetaGesture.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_MetaGesture.htm")]
     public sealed class MetaGesture : Gesture
     {
         #region Constants

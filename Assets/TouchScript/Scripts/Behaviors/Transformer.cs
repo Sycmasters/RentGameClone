@@ -15,7 +15,7 @@ namespace TouchScript.Behaviors
     /// Component which transforms an object according to events from transform gestures: <see cref="TransformGesture"/>, <see cref="ScreenTransformGesture"/>, <see cref="PinnedTransformGesture"/> and others.
     /// </summary>
     [AddComponentMenu("TouchScript/Behaviors/Transformer")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Transformer.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Behaviors_Transformer.htm")]
     public class Transformer : MonoBehaviour
     {
         // Here's how it works.

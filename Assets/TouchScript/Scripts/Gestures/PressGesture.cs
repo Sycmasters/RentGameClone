@@ -22,7 +22,7 @@ namespace TouchScript.Gestures
     /// <para>This is basically what <see cref="IgnoreChildren"/> is for. It makes parent's PressGesture only listen for TouchPoints which lend directly on it.</para>
     /// </remarks>
     [AddComponentMenu("TouchScript/Gestures/Press Gesture")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_PressGesture.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_PressGesture.htm")]
     public class PressGesture : Gesture
     {
         #region Constants

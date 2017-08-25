@@ -12,7 +12,7 @@ namespace TouchScript.Devices.Display
     /// <summary>
     /// A simple display device which inherits from <see cref="ScriptableObject"/> and can be saved in Unity assets.
     /// </summary>
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Devices_Display_DisplayDevice.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Devices_Display_DisplayDevice.htm")]
     public class DisplayDevice : ScriptableObject, IDisplayDevice
     {
 #if UNITY_EDITOR

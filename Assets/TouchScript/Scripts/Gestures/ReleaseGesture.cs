@@ -17,7 +17,7 @@ namespace TouchScript.Gestures
     /// </summary>
     /// <seealso cref="PressGesture"/>
     [AddComponentMenu("TouchScript/Gestures/Release Gesture")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_ReleaseGesture.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Gestures_ReleaseGesture.htm")]
     public class ReleaseGesture : Gesture
     {
         #region Constants

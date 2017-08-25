@@ -11,7 +11,7 @@ namespace TouchScript.Hit
     /// Makes an object it is attached to untouchable, i.e. it completely ignores all pointers landing on it.
     /// </summary>
     [AddComponentMenu("TouchScript/Behaviors/Untouchable")]
-    [HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Hit_Untouchable.htm")]
+    [@HelpURL("http://touchscript.github.io/docs/html/T_TouchScript_Hit_Untouchable.htm")]
     public class Untouchable : HitTest
     {
         #region Public properties
