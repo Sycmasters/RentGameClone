@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF Material
   m_Shader: {fileID: 4800000, guid: 00e4b3071c8fadf4d92704ba70e99b68, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: OUTLINE_ON _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -102,7 +102,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.232
     - _Parallax: 0.02
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: LiberationSans SDF Trans
   m_EditorClassIdentifier: 
-  hashCode: 231247347
+  hashCode: 1843351305
   material: {fileID: 2180264}
   materialHashCode: -1183942120
   fontAssetType: 1
