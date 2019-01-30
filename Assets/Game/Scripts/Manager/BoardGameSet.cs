@@ -11,6 +11,7 @@ public class BoardGameSet : ScriptableObject
     public PropertyInfo[] sections;   
     public Sprite[] cardsSprite;
     public string currencyString;
+    public Sprite centerSprite;
 
     public void SetSprite (SpriteRenderer render, int sectionIndex)
     {
