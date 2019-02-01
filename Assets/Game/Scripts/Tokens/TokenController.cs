@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using matnesis.TeaTime;
 
 public class TokenController : MonoBehaviour
 {
     [Header("Settings")]
     public int tokenIndex = 0;
     public float moveDuration = 10;
+    public float jumpPower = 1;
 
     [Header("Reference")]
     public Rigidbody rbody;
@@ -16,6 +18,7 @@ public class TokenController : MonoBehaviour
     public int currentTargetIndex = 0;
 
     private Vector3 rotate, translate;
+    private TeaTime moveNextSection;
 
     // Start is called before the first frame update
     void Start()
@@ -23,49 +26,45 @@ public class TokenController : MonoBehaviour
         if(rbody != null) rbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
-    public void MoveTo (Vector3 target, int targetIndex)
+    public void MoveTo (Vector3[] target, int targetIndex)
     {
-        rotate = Quaternion.LookRotation(target - transform.position).eulerAngles;
-        rotate.x = transform.eulerAngles.x;
+        moveNextSection = this.tt("@MoveSequence").Reset();
 
-        translate = target;
-        translate.y = transform.position.y;
+        for(int i = 0; i < target.Length; i++)
+        {
+            {
+                Vector3 section = target[i];
+                moveNextSection.Add(() => 
+                {                
+                    rotate = Quaternion.LookRotation(section - transform.position).eulerAngles;
+                    rotate.x = transform.eulerAngles.x;
 
-        transform.DOMove(translate, moveDuration);
-        transform.DORotate(rotate, moveDuration);
+                    translate = section;
+                    translate.y = transform.position.y;
+
+                    transform.DOJump(translate, jumpPower, 1, moveDuration);
+                    transform.DORotate(rotate, moveDuration);
+                })
+                .Add(moveDuration);
+            }
+        }
+        moveNextSection.Immutable();
 
         currentTargetIndex = targetIndex;
     }
 
     // We need to move linear can't jump to another 
-    public void MoveTo (Vector3[] target, int targetIndex)
-    {
-        rotate = Quaternion.LookRotation(target[0] - transform.position).eulerAngles;
-        rotate.x = transform.eulerAngles.x;
+    // public void MoveTo (Vector3[] target, int targetIndex)
+    // {
+    //     rotate = Quaternion.LookRotation(target[0] - transform.position).eulerAngles;
+    //     rotate.x = transform.eulerAngles.x;
 
-        translate = target[0];
-        translate.y = transform.position.y;
+    //     translate = target[0];
+    //     translate.y = transform.position.y;
 
-        transform.DOMove(translate, moveDuration);
-        transform.DORotate(rotate, moveDuration);
+    //     transform.DOMove(translate, moveDuration);
+    //     transform.DORotate(rotate, moveDuration);
 
-        currentTargetIndex = targetIndex;
-    }
-
-    public void ShareSpace ()
-    {
-
-    }
-
-    private void OnTriggerEnter (Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            TokenController token = other.GetComponent<TokenController>();
-            if(token.currentTargetIndex == currentTargetIndex)
-            {
-                token.ShareSpace();
-            }
-        }
-    }
+    //     currentTargetIndex = targetIndex;
+    // }
 }

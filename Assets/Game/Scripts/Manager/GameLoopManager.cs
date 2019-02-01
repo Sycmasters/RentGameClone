@@ -7,7 +7,7 @@ public class GameLoopManager : MonoBehaviour
     public BoardBehaviour board;
     public TokenController[] tokens;
     public int currentPlayer;
-    public int toSpaceDebug = 5;
+    public int spaceToMove = 5;
 
     // Start is called before the first frame update
     private void Start ()
@@ -23,7 +23,7 @@ public class GameLoopManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.L))
         {
-            tokens[currentPlayer].MoveTo(board.MoveToSpace(toSpaceDebug, tokens[currentPlayer]), toSpaceDebug);
+            tokens[currentPlayer].MoveTo(board.GetSpaces(spaceToMove, tokens[currentPlayer]), spaceToMove);
             if(currentPlayer < tokens.Length - 1)
             {
                 currentPlayer++;
