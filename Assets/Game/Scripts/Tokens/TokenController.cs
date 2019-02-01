@@ -52,19 +52,4 @@ public class TokenController : MonoBehaviour
 
         currentTargetIndex = targetIndex;
     }
-
-    // We need to move linear can't jump to another 
-    // public void MoveTo (Vector3[] target, int targetIndex)
-    // {
-    //     rotate = Quaternion.LookRotation(target[0] - transform.position).eulerAngles;
-    //     rotate.x = transform.eulerAngles.x;
-
-    //     translate = target[0];
-    //     translate.y = transform.position.y;
-
-    //     transform.DOMove(translate, moveDuration);
-    //     transform.DORotate(rotate, moveDuration);
-
-    //     currentTargetIndex = targetIndex;
-    // }
 }
