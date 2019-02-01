@@ -56,7 +56,7 @@ public class BoardPropertyInfo : MonoBehaviour
             List<int> availableSpaces = new List<int>();
             for(int i = 0; i < playersOnThisZone.Length; i++)
             {
-                if(playersOnThisZone[i] != -1)
+                if(playersOnThisZone[i] == -1)
                 {
                     availableSpaces.Add(i);
                 }
@@ -65,7 +65,7 @@ public class BoardPropertyInfo : MonoBehaviour
             // Choose between available spaces randomly
             int rmdPoint = Random.Range(0, availableSpaces.Count);
             playersOnThisZone[availableSpaces[rmdPoint]] = playerIndex;
-
+            
             // Convert that space into a vector that wwe are going to position ourself
             returnValue = ConvertPointToVector(availableSpaces[rmdPoint]);
 

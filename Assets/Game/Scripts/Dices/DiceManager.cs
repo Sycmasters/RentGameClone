@@ -36,19 +36,25 @@ public class DiceManager : MonoBehaviour
         }).Repeat();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P) && canRollAgain)
-        {
-            dicesValue = 0;
-            RollDices();
-            canRollAgain = false;
-        }
-    }
-
     public void RollDices ()
     {
+        if(!canRollAgain) return;
+
+        dicesValue = 0;
         dice1.RollDice();
         dice2.RollDice();
+        canRollAgain = false;
+    }
+
+    public void ResetDices ()
+    {
+        dicesValue = 0;
+        // dice1.ResetDice();
+        // dice2.ResetDice();
+    }
+
+    public bool CanRollAgain ()
+    {
+        return canRollAgain;
     }
 }

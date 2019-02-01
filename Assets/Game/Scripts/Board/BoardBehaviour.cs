@@ -34,17 +34,19 @@ public class BoardBehaviour : MonoBehaviour
         {
             // Store all vectors that we are going to be moving along
             currentSpaceVector = 0;
-            currentProperty = token.currentTargetIndex + 1;            
+            currentProperty = token.currentTargetIndex;            
             spacesVector = new Vector3[amountOfSpacesToGo];
 
             while(currentSpaceVector != amountOfSpacesToGo)
             {
-                spacesVector[currentSpaceVector] = properties[currentProperty].FindAvailablePoint(token.tokenIndex);
+                properties[currentProperty].LeaveSpace(token.tokenIndex);
 
                 if(currentProperty == 39) 
                     currentProperty = 0;
                 else 
                     currentProperty++;
+                    
+                spacesVector[currentSpaceVector] = properties[currentProperty].FindAvailablePoint(token.tokenIndex);
 
                 currentSpaceVector++;
             }
@@ -54,17 +56,19 @@ public class BoardBehaviour : MonoBehaviour
         {            
             // Store all vectors that we are going to be moving along
             currentSpaceVector = 0;
-            currentProperty = token.currentTargetIndex - 1;
+            currentProperty = token.currentTargetIndex;
             spacesVector = new Vector3[amountOfSpacesToGo];
 
             while(currentSpaceVector != amountOfSpacesToGo)
             {
-                spacesVector[currentSpaceVector] = properties[currentProperty].FindAvailablePoint(token.tokenIndex);
+                properties[currentProperty].LeaveSpace(token.tokenIndex);
 
                 if(currentProperty == 0) 
                     currentProperty = 39;
                 else 
                     currentProperty--;
+                    
+                spacesVector[currentSpaceVector] = properties[currentProperty].FindAvailablePoint(token.tokenIndex);
 
                 currentSpaceVector++;
             }
