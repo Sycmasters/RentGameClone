@@ -17,122 +17,207 @@ MonoBehaviour:
   - name: Inicio
     price: 0
     image: {fileID: 21300058, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Paso de Mogron
     price: 60
     image: {fileID: 21300000, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: ad7cad1bd8ae0dc40a897167d9f76ffe, type: 3}
+    rent: 020000000a0000001e0000005a000000a000000000000000
   - name: Sorpresa
     price: 0
     image: {fileID: 21300068, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Monte Targon
     price: 60
     image: {fileID: 21300002, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: ab32efa02755dea4ebe3041e9d10aa87, type: 3}
+    rent: 04000000140000003c000000b400000040010000c2010000
   - name: Impuestos
     price: 200
     image: {fileID: 21300056, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Skaarl
     price: 200
     image: {fileID: 21300046, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: a4b26f52c8b5db8478cfb8456aeb225a, type: 3}
+    rent: 190000003200000064000000c8000000
   - name: Reino de Lissandra
     price: 100
     image: {fileID: 21300008, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 4c3d10a411da2f04899a1a13df91fe4a, type: 3}
+    rent: 060000001e0000005a0000000e0100009001000026020000
   - name: Mision
     price: 0
     image: {fileID: 21300066, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Reino de Sejuani
     price: 100
     image: {fileID: 21300006, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 840de7d71f327d348b9968766e1942ba, type: 3}
+    rent: 060000001e0000005a0000000e0100009001000026020000
   - name: Reino de Ashe
     price: 120
     image: {fileID: 21300004, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 313a26a2f503a6941a6ef9a3639e8a17, type: 3}
+    rent: 080000003c000000640000002c010000c201000058020000
   - name: Islas de las sombras
-    price: 0
+    price: 50
     image: {fileID: 21300060, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Bosque Bandle
     price: 140
     image: {fileID: 21300010, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: b05c508fafefb7a48aa59c45144a8dea, type: 3}
+    rent: 0a0000003200000096000000c201000071020000ee020000
   - name: Dragon Ancestral
     price: 150
     image: {fileID: 21300042, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: ffb6a8ef501ad7c4389de57ecf8e84a5, type: 3}
+    rent: 050000000a000000
   - name: Taberna Bandle
     price: 140
     image: {fileID: 21300012, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 8d840ffb7afc8634ca0d1795e69c96d8, type: 3}
+    rent: 0a0000003200000096000000c201000071020000ee020000
   - name: Ciudad Bandle
     price: 160
     image: {fileID: 21300014, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 25799b27aa7de4343b6f9530a5a72149, type: 3}
+    rent: 0c0000003c000000b4000000f4010000bc02000084030000
   - name: Tahm Kench
     price: 200
     image: {fileID: 21300052, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 6808dc50e8c738249ba0eb9ef5aa7273, type: 3}
+    rent: 190000003200000064000000c8000000
   - name: El gran monasterio
     price: 180
     image: {fileID: 21300016, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: ba96010cc65639c4f98455a138afb1ed, type: 3}
+    rent: 0e00000046000000c800000026020000ee020000b6030000
   - name: Sorpresa
     price: 0
     image: {fileID: 21300068, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Valle Vastayah
     price: 180
     image: {fileID: 21300018, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 1790ee2756899404f9136f72dbf26573, type: 3}
+    rent: 0e00000046000000c800000026020000ee020000b6030000
   - name: Campo de batalla Ionia
     price: 200
     image: {fileID: 21300020, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 4b13a6291f114274cbcdec852ac96c86, type: 3}
+    rent: 1000000050000000dc0000005802000020030000e8030000
   - name: Banco de Piltover
     price: 0
     image: {fileID: 21300062, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: "Bah\xEDa Aguas Turbias"
     price: 220
     image: {fileID: 21300022, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: c975456c2329a8443ab17d3691789c77, type: 3}
+    rent: 120000005a000000fa000000bc0200006b0300001a040000
   - name: Mision
     price: 0
     image: {fileID: 21300066, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Taberna de Aguas Turbias
     price: 220
     image: {fileID: 21300024, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 85e936e97a72c3b408c0e61192027ecb, type: 3}
+    rent: 120000005a000000fa000000bc0200006b0300001a040000
   - name: Puente del carnicero
     price: 240
     image: {fileID: 21300026, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 0e9e6803d19f974449b46182068b4fe2, type: 3}
+    rent: 14000000640000002c010000ee0200009d0300004c040000
   - name: Bristle
     price: 200
     image: {fileID: 21300050, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 2e932773322a59c4e89536ff01cced1d, type: 3}
+    rent: 190000003200000064000000c8000000
   - name: Ruinas de Shurima
     price: 260
     image: {fileID: 21300028, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 25d1b69faae192b4d93f07d5894b61b3, type: 3}
+    rent: 160000006e0000004a01000020030000cf0300007e040000
   - name: Baron Nashor
     price: 150
     image: {fileID: 21300044, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 46a73334607b15f4599628fee89c1682, type: 3}
+    rent: 050000000a000000
   - name: Mercado de Shurima
     price: 260
     image: {fileID: 21300030, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 5d40a0a0417c6544faa98e430c607c1f, type: 3}
+    rent: 160000006e0000004a01000020030000cf0300007e040000
   - name: Disco Solar
     price: 280
     image: {fileID: 21300032, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 3147c69bc51479b48b23495be047d31d, type: 3}
+    rent: 1800000078000000680100005203000001040000b0040000
   - name: "El vac\xEDo"
     price: 0
     image: {fileID: 21300064, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Noxtoraa
     price: 300
     image: {fileID: 21300034, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: ceab9761097c1be4ca0b5c46ba254d1f, type: 3}
+    rent: 1a0000008200000086010000840300004c040000fb040000
   - name: Coliseo Noxiano
     price: 300
     image: {fileID: 21300036, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 30fa6087d8f03a64993c0b903328bea5, type: 3}
+    rent: 1a0000008200000086010000840300004c040000fb040000
   - name: Sorpresa
     price: 0
     image: {fileID: 21300068, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Capital de Noxus
     price: 320
     image: {fileID: 21300038, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 11c852e4de1490940ba986065128edd5, type: 3}
+    rent: 1c00000096000000c2010000e8030000b004000078050000
   - name: Valor
     price: 200
     image: {fileID: 21300048, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: 54dab8ad3c4290347be46a1317dfae5d, type: 3}
+    rent: 190000003200000064000000c8000000
   - name: Mision
     price: 0
     image: {fileID: 21300066, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: "Sal\xF3n del valor"
     price: 350
     image: {fileID: 21300040, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: a24acc9da288f85479d7cdb6cebd3b6b, type: 3}
+    rent: 1e000000af000000f40100004c04000014050000dc050000
   - name: Impuestos
     price: 75
     image: {fileID: 21300056, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 0}
+    rent: 
   - name: Palacio de Jarvan III
     price: 400
     image: {fileID: 21300054, guid: 64ce7a85c62aedb438b136dd5c7b109a, type: 3}
+    cardImage: {fileID: 21300000, guid: dab84491570353b4e86a67baa2ed4ea3, type: 3}
+    rent: 23000000c80000005802000078050000a4060000d0070000
   cardsSprite: []
   currencyString: 'PI '
+  houseString: Torreta
+  transportString: Transporte
+  serviceString: Monstruo
+  hotelString: Nexus
+  centerSprite: {fileID: 0}

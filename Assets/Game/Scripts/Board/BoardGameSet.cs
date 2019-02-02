@@ -11,6 +11,10 @@ public class BoardGameSet : ScriptableObject
     public PropertyInfo[] sections;   
     public Sprite[] cardsSprite;
     public string currencyString;
+    public string houseString;
+    public string transportString;
+    public string serviceString;
+    public string hotelString;
     public Sprite centerSprite;
 
     public void SetSprite (SpriteRenderer render, int sectionIndex)
@@ -38,4 +42,6 @@ public struct PropertyInfo
     public string name;
     public int price;
     public Sprite image;
+    public Sprite cardImage;
+    public int[] rent;
 }

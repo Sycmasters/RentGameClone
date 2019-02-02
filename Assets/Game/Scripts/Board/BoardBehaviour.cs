@@ -19,10 +19,16 @@ public class BoardBehaviour : MonoBehaviour
             for(int i = 0; i < properties.Length; i++)
             {
                 //Set sprites on the board
-                properties[i].SetInfo(gameSet.sections[i].image,
+                properties[i].SetInfo(gameSet.sections[i].image,                
+                    gameSet.sections[i].cardImage,
                     gameSet.sections[i].name,
                     gameSet.currencyString,
-                    gameSet.sections[i].price);
+                    gameSet.sections[i].price,
+                    gameSet.sections[i].rent,
+                    gameSet.hotelString,
+                    gameSet.houseString,
+                    gameSet.transportString,
+                    gameSet.serviceString);
             }
         }
     }

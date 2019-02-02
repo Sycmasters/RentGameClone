@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 802697115152988540}
   - component: {fileID: 1122849986329181630}
   - component: {fileID: 4592229524254942073}
+  - component: {fileID: 1590476472755765752}
   m_Layer: 0
   m_Name: BoardCardCorners
   m_TagString: Untagged
@@ -93,7 +94,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 1122849986329181630}
+  frameRender: {fileID: 1122849986329181630}
   nameDisplay: {fileID: 0}
   priceDisplay: {fileID: 0}
   propName: 
   propPrice: 0
+  ownedBy: -1
+  displayer: {fileID: 0}
+  playersOnThisZone: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+--- !u!65 &1590476472755765752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913431965512719397}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 0.6800002, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}

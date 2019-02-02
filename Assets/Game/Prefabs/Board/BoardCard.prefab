@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 802697115152988540}
   - component: {fileID: 1122849986329181630}
   - component: {fileID: 8642758747627603227}
+  - component: {fileID: 1981234385918121123}
   m_Layer: 0
   m_Name: BoardCard
   m_TagString: Untagged
@@ -303,10 +304,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 2392880989996087796}
+  frameRender: {fileID: 1122849986329181630}
   nameDisplay: {fileID: 3768995587277914319}
   priceDisplay: {fileID: 9062040244173123042}
   propName: 
   propPrice: 0
+  ownedBy: -1
+  displayer: {fileID: 0}
+  playersOnThisZone: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+--- !u!65 &1981234385918121123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913431965512719397}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 1.2200003, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3312244142578197756
 GameObject:
   m_ObjectHideFlags: 0

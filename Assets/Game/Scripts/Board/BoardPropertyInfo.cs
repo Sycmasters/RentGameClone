@@ -5,11 +5,17 @@ using TMPro;
 
 public class BoardPropertyInfo : MonoBehaviour
 {
-    public SpriteRenderer render;
+    public SpriteRenderer render, frameRender;
     public TextMeshPro nameDisplay, priceDisplay;
     public string propName;
     public int propPrice;
+    public int ownedBy = -1;
+    public CardDisplayer displayer;
     public int[] playersOnThisZone = new int[9] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+    
+    private int[] propRent;
+    private string houseString, hotelString, transportString, serviceString, currency;
+    private Sprite cardSprite;
 
     /*     
         TL0 TC1 TR2
@@ -27,7 +33,7 @@ public class BoardPropertyInfo : MonoBehaviour
         }
     }
     
-    public void SetInfo (Sprite image, string name, string currency, int price)
+    public void SetInfo (Sprite image, Sprite card, string name, string currency, int price, int[] rent, string hotel, string house, string transport, string service)
     {
         render.sprite = image;
 
@@ -38,6 +44,24 @@ public class BoardPropertyInfo : MonoBehaviour
         propPrice = price;
         if(priceDisplay != null)
             priceDisplay.text = currency + propPrice;
+
+        propRent = rent;
+        houseString = house;
+        hotelString = hotel;
+        transportString = transport;
+        serviceString = service;
+        cardSprite = card;
+    }
+
+    public void ShowInfo (bool justShow)
+    {
+        displayer.ShowCardInfo(cardSprite, frameRender, propRent, propName, houseString, hotelString, transportString, serviceString, currency, justShow);
+    }
+
+    public void OnMouseDown ()
+    {
+        if(!displayer.isShowingInfo && propRent != null && propRent.Length > 0)
+            ShowInfo(true);
     }
 
     public Vector3 FindAvailablePoint (int playerIndex)
